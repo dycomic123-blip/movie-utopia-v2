@@ -1,0 +1,287 @@
+/* Import Google Fonts - Must be first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Movie Utopia Premium Vibrant Theme */
+  --color-background: #141414;
+  --color-foreground: #ffffff;
+
+  /* Primary: Violet */
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+
+  /* Accent: Amber */
+  --color-accent: #f59e0b;
+  --color-accent-foreground: #141414;
+
+  /* Glassmorphism Cards */
+  --color-card: oklch(1 0 0 / 5%);
+  --color-card-foreground: #ffffff;
+
+  /* Borders & Inputs */
+  --color-border: oklch(1 0 0 / 10%);
+  --color-input: oklch(1 0 0 / 10%);
+  --color-ring: #8b5cf6;
+
+  /* Muted Text */
+  --color-muted: oklch(1 0 0 / 10%);
+  --color-muted-foreground: #a1a1aa;
+
+  /* Secondary */
+  --color-secondary: oklch(1 0 0 / 10%);
+  --color-secondary-foreground: #ffffff;
+
+  /* Popover */
+  --color-popover: #1a1a1a;
+  --color-popover-foreground: #ffffff;
+
+  /* Destructive */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  /* Charts */
+  --color-chart-1: #8b5cf6;
+  --color-chart-2: #f59e0b;
+  --color-chart-3: #06b6d4;
+  --color-chart-4: #ec4899;
+  --color-chart-5: #10b981;
+
+  /* Sidebar */
+  --color-sidebar: #1a1a1a;
+  --color-sidebar-foreground: #ffffff;
+  --color-sidebar-primary: #8b5cf6;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: oklch(1 0 0 / 10%);
+  --color-sidebar-accent-foreground: #ffffff;
+  --color-sidebar-border: oklch(1 0 0 / 10%);
+  --color-sidebar-ring: #8b5cf6;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
+
+  /* Fonts */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+
+  /* Custom Animations */
+  --animate-shimmer: shimmer 8s linear infinite;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Noise Texture Overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Hide default scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.5);
+  }
+
+  /* Custom scrollbar class for specific elements */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.4);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.6);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  /* Cinema mode utility */
+  .cinema-mode {
+    background-color: #141414;
+  }
+
+  /* Glassmorphism utility */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Text gradient utility */
+  .text-gradient {
+    background: linear-gradient(to right, #8b5cf6, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Keyframes for animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero animations */
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  opacity: 0;
+  animation: fade-in 1s ease-out 0.3s forwards;
+}
+
+.animate-fade-in-delay-2 {
+  opacity: 0;
+  animation: fade-in 1s ease-out 0.6s forwards;
+}
+
+/* Hero Title - Fluid Typography with Gradient and Clip Mask Effect */
+.hero-title {
+  /* Fluid typography: scales from 3rem (48px) to 10rem (160px) */
+  font-size: clamp(3rem, 8vw + 1rem, 10rem);
+  line-height: 1.1;
+
+  /* Initial state: Pure white */
+  color: #ffffff;
+
+  /* Clip mask hover effect */
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.hero-title::before {
+  content: 'MOVIE UTOPIA';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8b5cf6 0%, #f59e0b 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hero-title:hover::before {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Hero Subtitle - Fluid Typography */
+.hero-subtitle {
+  /* Fluid typography: scales from 1rem (16px) to 2.5rem (40px) */
+  font-size: clamp(1rem, 2vw + 0.5rem, 2.5rem);
+  line-height: 1.4;
+
+  /* Subtle gradient */
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(245, 158, 11, 0.9) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Masonry Grid Styles - 高级感布局 */
+.masonry-grid {
+  display: flex;
+  margin-left: -24px; /* 更大的间距 */
+  width: auto;
+}
+
+.masonry-column {
+  padding-left: 24px; /* 更大的间距 */
+  background-clip: padding-box;
+}
+
+.masonry-column > div {
+  margin-bottom: 32px; /* 更舒适的纵向间距 */
+}
+
+/* 高级卡片效果 */
+.masonry-column > div article {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.masonry-column > div article:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}

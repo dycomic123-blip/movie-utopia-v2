@@ -1,0 +1,1999 @@
+<html lang="en" class="scroll-smooth" xmlns="http://www.w3.org/1999/xhtml" xmlns:pencil="http://pencil.evolus.vn/ns">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVIE UTOPIA | Industrial AI Filmmaking</title>
+    <script src="assets/js/tailwind.min.js"></script>
+    <!-- Local Typography -->
+    <!-- Google Fonts: Syne & Unbounded -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Unbounded:wght@400;900&family=Geist:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Advanced Animations CSS -->
+    <link rel="stylesheet" href="css/animations.css">
+    <!-- Queueing Animation CSS -->
+    <link rel="stylesheet" href="css/queueing-animation.css">
+    <!-- Unified Styles - Match Main Site -->
+    <link rel="stylesheet" href="css/unified-styles.css">
+
+    <style>
+        /* Hide all page scrollbars */
+        body,
+        html {
+            overflow: hidden;
+        }
+
+        /* Refractive Edge & Glass Refinement */
+        .glass-premium {
+            backdrop-filter: blur(40px) saturate(180%);
+            background: rgba(10, 10, 10, 0.5);
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.02);
+            position: relative;
+            overflow: hidden !important;
+        }
+
+        .glass-premium::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            z-index: 1;
+        }
+
+        /* Glitch Effect for Error Feedback */
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-3px, 3px);
+                filter: hue-rotate(90deg);
+            }
+
+            40% {
+                transform: translate(-3px, -3px);
+                filter: hue-rotate(180deg);
+            }
+
+            60% {
+                transform: translate(3px, 3px);
+                filter: hue-rotate(270deg);
+            }
+
+            80% {
+                transform: translate(3px, -3px);
+                filter: hue-rotate(360deg);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .animate-glitch {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        }
+
+        /* Energy Pulse Animation */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-4px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(4px);
+            }
+        }
+
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 150% center, 0% 0%;
+            }
+
+            100% {
+                background-position: -150% center, 0% 0%;
+            }
+        }
+
+        .shiny-text {
+            background:
+                linear-gradient(120deg,
+                    rgba(255, 255, 255, 0) 25%,
+                    rgba(255, 255, 255, 0.9) 50%,
+                    rgba(255, 255, 255, 0) 75%),
+                linear-gradient(to bottom, #a1a1aa, #52525b);
+            /* Light Gray (zinc-400) to Dark Gray (zinc-600) */
+            background-size: 200% auto, 100% 100%;
+            background-repeat: no-repeat;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: shine 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-iteration-count: 1;
+        }
+
+        /* Smooth View Entrance (Phase 69) */
+        .view-entrance {
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 1s cubic-bezier(0.2, 0, 0, 1),
+                transform 1.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .view-entrance.active-entrance {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Dialog Soft Glow (Phase 74/77) */
+        #main-dialog-container {
+            box-shadow: 0 0 0 rgba(255, 107, 53, 0);
+            /* Explicit dark start */
+            transition: box-shadow 4.0s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #main-dialog-container.active-glow {
+            box-shadow: 0 0 80px rgba(255, 107, 53, 0.25),
+                0 0 40px rgba(255, 107, 53, 0.15),
+                inset 0 0 20px rgba(255, 107, 53, 0.05);
+        }
+
+        @keyframes energy-pulse {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* View Management */
+        .view-section {
+            display: none !important;
+            /* Strict hiding */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .view-section.active {
+            display: flex !important;
+            /* Flex by default for our layouts */
+            opacity: 1;
+        }
+
+        .energy-line {
+            position: absolute;
+            height: 100%;
+            width: 40%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            top: 0;
+            z-index: 5;
+            pointer-events: none;
+            display: none;
+        }
+
+        .energy-active .energy-line {
+            display: block;
+            animation: energy-pulse 0.8s ease-in-out forwards;
+        }
+
+        /* Warp Entrance Transition */
+        .app-warp {
+            animation: warp-in 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes warp-in {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0) brightness(1);
+            }
+
+            50% {
+                filter: blur(10px) brightness(2);
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+                filter: blur(40px) brightness(5);
+            }
+        }
+
+        /* Mechanical Lock Animation */
+        .lock-shackle {
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: left bottom;
+        }
+
+        .lock-unlocked .lock-shackle {
+            transform: translateY(-3px) rotate(-15deg);
+        }
+
+        /* Premium Metadata Badges */
+        .meta-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 6px;
+            padding: 2px 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .meta-badge:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Ambient Glow for Video Cards */
+        .ambient-glow {
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .generating .ambient-glow {
+            opacity: 1;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.25;
+            }
+        }
+
+        /* Shimmering Border Animation */
+        .shimmer-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-border::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg,
+                    transparent 0deg 340deg,
+                    rgba(255, 255, 255, 0.1) 360deg);
+            animation: rotate 4s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Quick Command Chips */
+        .command-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a1a1aa;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .command-chip:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Typing Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s infinite;
+            margin-left: 2px;
+            color: #f97316;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="on-landing selection:bg-white/20 selection:text-white">
+
+    <canvas id="hero-canvas" class="canvas-bg"></canvas>
+    <canvas id="prism-canvas" class="canvas-bg"></canvas>
+    <canvas id="waves-canvas" class="canvas-bg"></canvas>
+    <canvas id="bubbles-canvas" class="canvas-bg"></canvas>
+    <canvas id="dot-pattern-canvas" class="canvas-bg"></canvas>
+    <canvas id="dots-canvas" class="canvas-bg"></canvas>
+    <div class="spotlight-overlay"></div>
+    <div class="bg-noise"></div>
+
+    <!-- Navigation - Studio Layout -->
+    <header class="fixed top-0 inset-x-0 z-50 glass backdrop-blur-xl border-b border-white/10">
+        <div class="w-full px-6">
+            <div class="flex items-center h-16">
+                <!-- Left: Logo + About Us (靠左) -->
+                <div class="flex items-center gap-4">
+                    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                        <img src="logo.png" alt="Movie Utopia Logo" class="w-10 h-10 object-contain">
+                        <span class="text-xl font-serif font-extrabold text-white uppercase tracking-wide">
+                            MOVIE UTOPIA
+                        </span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex items-center gap-6" aria-label="Primary navigation">
+                        <a href="/#about" class="text-sm font-medium hover:text-primary transition-colors">
+                            About Us
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Spacer (中间空白) -->
+                <div class="flex-1"></div>
+
+                <!-- Right: Actions (靠右) -->
+                <div class="flex items-center gap-2">
+                    <!-- Search Button -->
+                    <button class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="Open search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Credit Balance -->
+                    <div class="flex items-center gap-2 px-3 py-2 glass rounded-lg">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-500">
+                            <circle cx="8" cy="8" r="6"></circle>
+                            <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
+                            <path d="M7 6h1v4"></path>
+                            <path d="m16.71 13.88.7.71-2.82 2.82"></path>
+                        </svg>
+                        <span class="text-sm font-medium">100 Credits</span>
+                    </div>
+
+                    <!-- Create Video Button - Orange -->
+                    <a href="/" class="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/20">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m13.73 4 3.54 3.54L7 17.8 2.92 15.42 13.73 4z"></path>
+                            <path d="m17.27 7.54 3.54 3.54-1.78 1.78-3.54-3.54 1.78-1.78z"></path>
+                            <path d="M4 19a2 2 0 0 0 2 2h16"></path>
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+
+                    <!-- User Avatar -->
+                    <div class="relative user-dropdown">
+                        <button class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="User menu" onclick="toggleUserMenu()">
+                            <div class="w-8 h-8 rounded-full ring-2 ring-amber-500/50 ring-offset-2 ring-offset-background flex items-center justify-center bg-primary text-white font-semibold text-sm overflow-hidden">
+                                <span>JD</span>
+                            </div>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div id="user-menu" class="hidden absolute right-0 mt-2 w-56 glass backdrop-blur-xl border border-white/10 rounded-lg shadow-xl overflow-hidden">
+                            <div class="px-4 py-3 border-b border-white/10">
+                                <p class="text-sm font-medium">My Account</p>
+                            </div>
+                            <div class="py-1">
+                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span>Profile</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <span>Settings</span>
+                                </a>
+                            </div>
+                            <div class="border-t border-white/10">
+                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                                    </svg>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="Open mobile menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="4" x2="20" y1="12" y2="12"></line>
+                            <line x1="4" x2="20" y1="6" y2="6"></line>
+                            <line x1="4" x2="20" y1="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+    // Toggle user menu dropdown
+    function toggleUserMenu() {
+        const menu = document.getElementById('user-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.querySelector('.user-dropdown');
+        const menu = document.getElementById('user-menu');
+        if (dropdown && !dropdown.contains(event.target)) {
+            menu.classList.add('hidden');
+        }
+    });
+    </script>
+
+    <!-- VIEW 2: INPUT -->
+    <main id="view-input" class="view-section active min-h-screen flex-col items-center justify-center relative pt-14 px-4">
+        <!-- Back Button -->
+
+        <div class="w-full max-w-3xl z-10">
+            <div class="text-center mb-10">
+                <h2 class="shiny-text text-5xl font-medium tracking-wider font-geist mb-4">
+                    工业级电影AI制片从这里开始</h2>
+                <p class="text-2xl font-light text-zinc-500 mt-2 tracking-widest uppercase"
+                    style="background-color: transparent !important;">Industrial AI Filmmaking Starts Here</p>
+            </div>
+
+            <div class="relative group delay-100">
+
+                <div id="main-dialog-container"
+                    class="relative bg-[#0a0a0a] border border-white/12 rounded-xl p-1 shadow-2xl backdrop-blur-sm">
+                    <div class="bg-zinc-900/30 rounded-lg p-4">
+                        <textarea id="prompt-input"
+                            class="w-full bg-transparent text-white text-base placeholder-zinc-700 resize-none outline-none min-h-[140px] font-light leading-relaxed"
+                            placeholder="A cyberpunk detective standing in rain, neon reflections, 85mm lens, shallow depth of field, volumetric fog, cinematic lighting..."></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between px-2 py-3">
+                        <div class="flex gap-2">
+                            <!-- Modified Icons: Folder & Magic Book -->
+                            <button onclick="document.getElementById('direct-file-input').click()"
+                                class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300 interactive-glow hover:-translate-y-1"
+                                title="Attach File">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="m21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                                </svg>
+                                <input type="file" id="direct-file-input" class="hidden"
+                                    onchange="handleDirectFileSelect(this)">
+                            </button>
+                            <button
+                                class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300 interactive-glow hover:-translate-y-1"
+                                title="AI Assistant">
+                                <svg width="22" height="22" viewBox="0 0 24 24" class="scale-x-[-1]">
+                                    <g fill="none" stroke="currentColor">
+                                        <path stroke-width="1.5"
+                                            d="M3.845 7.922a2.883 2.883 0 1 1 4.077-4.077l12.234 12.233a2.884 2.884 0 0 1-4.078 4.078z" />
+                                        <path stroke-linecap="round" stroke-width="1.5" d="m6 10l4-4" />
+                                        <path
+                                            d="M16.1 2.307a.483.483 0 0 1 .9 0l.43 1.095a.48.48 0 0 0 .272.274l1.091.432a.486.486 0 0 1 0 .903l-1.09.432a.5.5 0 0 0-.273.273L17 6.81a.483.483 0 0 1-.9 0l-.43-1.095a.5.5 0 0 0-.273-.273l-1.09-.432a.486.486 0 0 1 0-.903l1.09-.432a.5.5 0 0 0 .273-.274zm3.867 6.823a.483.483 0 0 1 .9 0l.156.399c.05.125.148.224.273.273l.398.158a.486.486 0 0 1 0 .902l-.398.158a.5.5 0 0 0-.273.273l-.156.4.483.483 0 0 1-.9 0l-.157-.4a.5.5 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.902l.398-.158a.5.5 0 0 0 .272-.273zM5.133 15.307a.483.483 0 0 1 .9 0l.157.4a.48.48 0 0 0 .272.273l.398.157a.486.486 0 0 1 0 .903l-.398.158a.48.48 0 0 0-.272.273l-.157.4a.483.483 0 0 1-.9 0l-.157-.4a.48.48 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.903l.398-.157a.48.48 0 0 0 .272-.274z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <button onclick="generateVideo()" id="btn-generate"
+                            class="btn-shine flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white pl-5 pr-4 py-2 rounded-lg text-xs font-semibold hover:from-orange-500 hover:to-orange-400 hover:shadow-[0_0_20px_rgba(255,107,53,0.4)] transition-all duration-300 shadow-lg shadow-orange-500/20">
+                            <span class="shine-layer"></span>
+                            <span class="btn-text relative z-10" data-i18n="generate">Create</span>
+                            <div id="btn-tag-hole"
+                                class="hidden relative z-10 px-2 py-0.5 rounded-md text-[11px] font-bold text-white btn-tag-glass">
+                            </div>
+                            <svg width="16" height="16" viewBox="0 0 24 24" class="relative z-10 animate-pulse">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M20.2 6L3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Zm-14-.7l3.1 3.9m3.1-5.8l3.1 4M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scrolling Prompt Cards Marquee -->
+                <div id="prompt-marquee" class="prompt-marquee-container delay-200">
+                    <div id="prompt-marquee-content" class="prompt-marquee-inner">
+                        <div class="prompt-card" onclick="fillPrompt('Inspirational')" data-i18n="tag_Inspirational">
+                            Inspirational</div>
+                        <div class="prompt-card" onclick="fillPrompt('Passionate')" data-i18n="tag_Passionate">
+                            Passionate</div>
+                        <div class="prompt-card" onclick="fillPrompt('Tragic')" data-i18n="tag_Tragic">Tragic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Healing')" data-i18n="tag_Healing">Healing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Soft')" data-i18n="tag_Soft">Soft</div>
+                        <div class="prompt-card" onclick="fillPrompt('Mind-bending')" data-i18n="tag_Mind-bending">
+                            Mind-bending</div>
+                        <div class="prompt-card" onclick="fillPrompt('Twisty')" data-i18n="tag_Twisty">Twisty</div>
+                        <div class="prompt-card" onclick="fillPrompt('Epic')" data-i18n="tag_Epic">Epic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Absurd')" data-i18n="tag_Absurd">Absurd</div>
+                        <div class="prompt-card" onclick="fillPrompt('Dark')" data-i18n="tag_Dark">Dark</div>
+                        <div class="prompt-card" onclick="fillPrompt('Depressing')" data-i18n="tag_Depressing">
+                            Depressing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Humor')" data-i18n="tag_Humor">Humor</div>
+                        <div class="prompt-card" onclick="fillPrompt('Detached')" data-i18n="tag_Detached">Detached
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Romantic')" data-i18n="tag_Romantic">Romantic
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">Grotesque
+                        </div>
+                        <!-- Duplicate for loop -->
+                        <div class="prompt-card" onclick="fillPrompt('Inspirational')" data-i18n="tag_Inspirational">
+                            Inspirational</div>
+                        <div class="prompt-card" onclick="fillPrompt('Passionate')" data-i18n="tag_Passionate">
+                            Passionate</div>
+                        <div class="prompt-card" onclick="fillPrompt('Tragic')" data-i18n="tag_Tragic">Tragic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Healing')" data-i18n="tag_Healing">Healing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Soft')" data-i18n="tag_Soft">Soft</div>
+                        <div class="prompt-card" onclick="fillPrompt('Mind-bending')" data-i18n="tag_Mind-bending">
+                            Mind-bending</div>
+                        <div class="prompt-card" onclick="fillPrompt('Twisty')" data-i18n="tag_Twisty">Twisty</div>
+                        <div class="prompt-card" onclick="fillPrompt('Epic')" data-i18n="tag_Epic">Epic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Absurd')" data-i18n="tag_Absurd">Absurd</div>
+                        <div class="prompt-card" onclick="fillPrompt('Dark')" data-i18n="tag_Dark">Dark</div>
+                        <div class="prompt-card" onclick="fillPrompt('Depressing')" data-i18n="tag_Depressing">
+                            Depressing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Humor')" data-i18n="tag_Humor">Humor</div>
+                        <div class="prompt-card" onclick="fillPrompt('Detached')" data-i18n="tag_Detached">Detached
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Romantic')" data-i18n="tag_Romantic">Romantic
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">Grotesque
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW 3: RESULT (聊天式三栏布局) -->
+    <main id="view-result"
+        class="view-section h-screen max-h-screen w-screen flex pt-14 relative overflow-hidden bg-[#050505]">
+
+        <!-- 左栏: 聊天历史 + 输入框 (1/3 视口宽度) -->
+        <aside
+            class="w-1/3 min-w-[400px] max-w-[600px] flex flex-col border-r border-white/5 bg-[#111] backdrop-blur-xl z-20">
+            <!-- 顶部标题栏 -->
+            <div class="px-5 py-4 border-b border-white/5 flex items-center justify-between">
+                <button onclick="goBackToInput()"
+                    class="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group">
+                    <svg width="16" height="16" viewBox="0 0 24 24"
+                        class="group-hover:-translate-x-1 transition-transform">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5" d="M19 12H5m7-7l-7 7l7 7" />
+                    </svg>
+                    <span class="text-xs font-medium" data-i18n="back_to_create">返回创作</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleHistoryPanel()" title="显示/隐藏历史"
+                        class="p-1.5 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all">
+                        <svg width="16" height="16" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5" d="M3 7h18M3 12h18M3 17h18" />
+                        </svg>
+                    </button>
+                    <button onclick="clearChatHistory()" title="清除历史"
+                        class="p-1.5 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-red-400 transition-all">
+                        <svg width="16" height="16" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-6 5v6m4-6v6" />
+                        </svg>
+                    </button>
+                    <span class="text-xs font-semibold text-zinc-500 tracking-wider uppercase"
+                        data-i18n="history">历史记录</span>
+                </div>
+            </div>
+
+            <!-- 可滚动聊天历史区 -->
+            <div id="chat-history-panel"
+                class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6 transition-all duration-300">
+                <div class="text-center text-zinc-500 text-xs py-12">暂无历史记录</div>
+            </div>
+
+            <!-- 底部输入区 (侧边栏布局优化) -->
+            <div class="p-2 pb-6 border-t border-white/5 bg-[#050505] -mt-2">
+
+
+                <div id="main-dialog-result"
+                    class="relative bg-[#0a0a0a] border border-white/12 rounded-xl p-1 shadow-2xl backdrop-blur-sm">
+                    <div class="bg-zinc-900/30 rounded-lg p-3">
+                        <textarea id="prompt-input-result"
+                            class="w-full bg-transparent text-white text-sm placeholder-zinc-700 resize-none outline-none min-h-[100px] font-light leading-relaxed custom-scrollbar"
+                            placeholder="描述你的下一个镜头..."></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between px-2 py-2">
+                        <div class="flex gap-2">
+                            <button onclick="document.getElementById('direct-file-input-result').click()"
+                                class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300"
+                                title="附加文件">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="m21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                                </svg>
+                                <input type="file" id="direct-file-input-result" class="hidden">
+                            </button>
+                            <button
+                                class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300"
+                                title="AI 助手">
+                                <svg width="18" height="18" viewBox="0 0 24 24" class="scale-x-[-1]">
+                                    <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path
+                                            d="M3.845 7.922a2.883 2.883 0 1 1 4.077-4.077l12.234 12.233a2.884 2.884 0 0 1-4.078 4.078z" />
+                                        <path stroke-linecap="round" d="m6 10l4-4" />
+                                        <path
+                                            d="M16.1 2.307a.483.483 0 0 1 .9 0l.43 1.095a.48.48 0 0 0 .272.274l1.091.432a.486.486 0 0 1 0 .903l-1.09.432a.5.5 0 0 0-.273.273L17 6.81a.483.483 0 0 1-.9 0l-.43-1.095a.5.5 0 0 0-.273-.273l-1.09-.432a.486.486 0 0 1 0-.903l1.09-.432a.5.5 0 0 0 .273-.274zm3.867 6.823a.483.483 0 0 1 .9 0l.156.399c.05.125.148.224.273.273l.398.158a.486.486 0 0 1 0 .902l-.398.158a.5.5 0 0 0-.273.273l-.156.4.483.483 0 0 1-.9 0l-.157-.4a.5.5 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.902l.398-.158a.5.5 0 0 0 .272-.273zM5.133 15.307a.483.483 0 0 1 .9 0l.157.4a.48.48 0 0 0 .272.273l.398.157a.486.486 0 0 1 0 .903l-.398.158a.48.48 0 0 0-.272.273l-.157.4a.483.483 0 0 1-.9 0l-.157-.4a.48.48 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.903l.398-.157a.48.48 0 0 0 .272-.274z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <button onclick="generateVideoFromResult()" id="btn-generate-result"
+                            class="btn-shine flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white pl-4 pr-3 py-1.5 rounded-lg text-xs font-semibold hover:from-orange-500 hover:to-orange-400 transition-all duration-300 shadow-lg shadow-orange-500/20">
+                            <span class="shine-layer"></span>
+                            <span class="btn-text relative z-10" data-i18n="generate">Create</span>
+                            <div id="btn-tag-hole-result"
+                                class="hidden relative z-10 px-2 py-0.5 rounded-md text-[11px] font-bold text-white btn-tag-glass">
+                            </div>
+                            <svg width="14" height="14" viewBox="0 0 24 24" class="relative z-10 animate-pulse">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M20.2 6L3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Zm-14-.7l3.1 3.9m3.1-5.8l3.1 4M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scrolling Prompt Cards Marquee for Result Page -->
+                <div id="prompt-marquee-result" class="prompt-marquee-container delay-200 mt-2 h-12 py-1">
+                    <div id="prompt-marquee-content-result" class="prompt-marquee-inner">
+                        <div class="prompt-card" onclick="fillPrompt('Inspirational')" data-i18n="tag_Inspirational">
+                            Inspirational</div>
+                        <div class="prompt-card" onclick="fillPrompt('Passionate')" data-i18n="tag_Passionate">
+                            Passionate</div>
+                        <div class="prompt-card" onclick="fillPrompt('Tragic')" data-i18n="tag_Tragic">Tragic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Healing')" data-i18n="tag_Healing">Healing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Soft')" data-i18n="tag_Soft">Soft</div>
+                        <div class="prompt-card" onclick="fillPrompt('Mind-bending')" data-i18n="tag_Mind-bending">
+                            Mind-bending</div>
+                        <div class="prompt-card" onclick="fillPrompt('Twisty')" data-i18n="tag_Twisty">Twisty</div>
+                        <div class="prompt-card" onclick="fillPrompt('Epic')" data-i18n="tag_Epic">Epic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Absurd')" data-i18n="tag_Absurd">Absurd</div>
+                        <div class="prompt-card" onclick="fillPrompt('Dark')" data-i18n="tag_Dark">Dark</div>
+                        <div class="prompt-card" onclick="fillPrompt('Depressing')" data-i18n="tag_Depressing">
+                            Depressing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Humor')" data-i18n="tag_Humor">Humor</div>
+                        <div class="prompt-card" onclick="fillPrompt('Detached')" data-i18n="tag_Detached">Detached
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Romantic')" data-i18n="tag_Romantic">Romantic
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">Grotesque
+                        </div>
+                        <!-- Duplicate for loop -->
+                        <div class="prompt-card" onclick="fillPrompt('Inspirational')" data-i18n="tag_Inspirational">励志
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Passionate')" data-i18n="tag_Passionate">热血</div>
+                        <div class="prompt-card" onclick="fillPrompt('Tragic')" data-i18n="tag_Tragic">悲剧</div>
+                        <div class="prompt-card" onclick="fillPrompt('Healing')" data-i18n="tag_Healing">治愈</div>
+                        <div class="prompt-card" onclick="fillPrompt('Soft')" data-i18n="tag_Soft">柔和</div>
+                        <div class="prompt-card" onclick="fillPrompt('Mind-bending')" data-i18n="tag_Mind-bending">烧脑
+                        </div>
+                        <div class="prompt-card" onclick="fillPrompt('Twisty')" data-i18n="tag_Twisty">反转</div>
+                        <div class="prompt-card" onclick="fillPrompt('Epic')" data-i18n="tag_Epic">宏大</div>
+                        <div class="prompt-card" onclick="fillPrompt('Absurd')" data-i18n="tag_Absurd">荒诞</div>
+                        <div class="prompt-card" onclick="fillPrompt('Dark')" data-i18n="tag_Dark">黑暗</div>
+                        <div class="prompt-card" onclick="fillPrompt('Depressing')" data-i18n="tag_Depressing">压抑</div>
+                        <div class="prompt-card" onclick="fillPrompt('Humor')" data-i18n="tag_Humor">幽默</div>
+                        <div class="prompt-card" onclick="fillPrompt('Detached')" data-i18n="tag_Detached">疏离</div>
+                        <div class="prompt-card" onclick="fillPrompt('Romantic')" data-i18n="tag_Romantic">浪漫</div>
+                        <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">怪诞</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 中栏: 预览区域 (弹性宽度) -->
+        <div class="flex-1 h-full flex flex-col relative overflow-hidden bg-black">
+            <!-- 视频生成容器 (可容纳多个视频卡片) -->
+            <!-- Video List (Scrollable) -->
+            <div id="video-list-container"
+                class="w-full h-full overflow-y-auto custom-scrollbar flex flex-col items-center gap-12 p-8 scroll-smooth snap-y snap-mandatory">
+                <!-- 视频卡片 1 (0.8 缩放) -->
+                <!-- Unified Video Card (Page 2 Generation Target) -->
+                <!-- Video Card (Unified Design) -->
+                <div id="video-card-initial"
+                    class="w-[95%] max-w-5xl mb-12 unified-video-card generating snap-center shrink-0 rounded-3xl overflow-hidden">
+                    <div class="ambient-glow"></div>
+
+                    <div class="relative z-10 flex flex-col h-full">
+                        <!-- Top Status Bar -->
+                        <div
+                            class="card-status-bar flex items-center justify-between p-4 border-b border-white/5 bg-white/5 backdrop-blur-md">
+                            <!-- Left: Status as Orange Capsule -->
+                            <div
+                                class="px-3 py-1 rounded-full bg-orange-500 text-black text-[10px] font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(249,115,22,0.4)] flex items-center gap-2 animate-pulse">
+                                <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
+                                Generating #8292B
+                            </div>
+
+                            <!-- Right: Actions -->
+                            <div class="flex gap-2">
+                                <button
+                                    class="px-3 py-1.5 rounded-lg border border-white/5 bg-white/5 text-[10px] font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5 backdrop-blur-md">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="7 10 12 15 17 10" />
+                                        <line x1="12" y1="15" x2="12" y2="3" />
+                                    </svg>
+                                    <span data-i18n="export">导出</span>
+                                </button>
+                                <button onclick="openProEditor()"
+                                    class="px-3 py-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20 text-[10px] font-bold text-orange-400 hover:bg-orange-500/20 hover:text-orange-300 transition-all flex items-center gap-1.5 backdrop-blur-md">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                    <span data-i18n="edit_in_pro">专业编辑</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Video Player Area -->
+                        <div class="flex-grow aspect-video relative overflow-hidden bg-black group">
+                            <div
+                                class="hidden absolute inset-0 bg-zinc-900 bg-cover bg-center opacity-60 transition duration-700 group-hover:scale-105">
+                            </div>
+
+                            <!-- Generation Overlay -->
+                            <div id="generation-particle-container"
+                                class="hidden absolute inset-0 z-10 bg-black/80 backdrop-blur-sm">
+
+                                <!-- 胶片动画 - 屏幕居中 -->
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <div class="queueing-container" style="min-height: auto;">
+                                        <div class="film-frame" style="width: 240px; height: 153px;">
+                                            <!-- 顶部齿孔带 -->
+                                            <div class="sprocket-top" style="height: 9px;">
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                            </div>
+                                            <!-- 中央画面区域 -->
+                                            <div class="film-aperture" style="width: 240px; height: 135px; border-width: 3px;">
+                                                <div class="grid-overlay"></div>
+                                                <div class="scan-line"></div>
+                                                <div class="light-sweep"></div>
+                                                <div class="status-label top-left" style="font-size: 10px;">RENDERING</div>
+                                                <div class="status-label bottom-right" style="font-size: 10px;">16:9</div>
+                                            </div>
+                                            <!-- 底部齿孔带 -->
+                                            <div class="sprocket-bottom" style="height: 9px;">
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                                <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 底部信息区域 - 左下角 -->
+                                <div class="absolute bottom-12 left-12 flex flex-col gap-3 z-20">
+                                    <!-- 进度状态 -->
+                                    <div class="flex items-center gap-2 text-white" style="font-size: 12px; font-weight: 500;">
+                                        <span style="color: #888;">排队中</span>
+                                        <span style="color: #FF8800;" class="animate-pulse">>>>>>></span>
+                                        <span style="color: #FF8800; font-weight: 600;">创作</span>
+                                        <span style="color: #666;" class="animate-pulse">>>>>>></span>
+                                    </div>
+
+                                    <!-- 提示文案 -->
+                                    <div style="font-size: 10px; color: #999; font-weight: 400;">
+                                        创作中，预计等待 1 分钟
+                                    </div>
+
+                                    <!-- 通知提示 -->
+                                    <div class="flex items-center gap-1 mt-1" style="font-size: 8px; color: #666;">
+                                        <svg width="11" height="11" viewBox="0 0 20 20" fill="none" class="flex-shrink-0">
+                                            <path d="M10 2C6.68629 2 4 4.68629 4 8V11.5858L2.29289 13.2929C1.90237 13.6834 2.17811 14.5 2.70711 14.5H17.2929C17.8219 14.5 18.0976 13.6834 17.7071 13.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z" fill="#FF8800" opacity="0.5"/>
+                                            <path d="M8 16C8 17.1046 8.89543 18 10 18C11.1046 18 12 17.1046 12 16" stroke="#FF8800" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                        <span>打开通知，我们将在任务完成后通过浏览器通知您。</span>
+                                    </div>
+                                </div>
+
+                                <!-- 右上角状态信息 -->
+                                <div class="absolute top-8 right-12 text-right" style="font-family: monospace; font-size: 12px; color: #666;">
+                                    <div>QUEUE STATUS: ACTIVE</div>
+                                    <div class="mt-2" style="color: #FF8800;">
+                                        RENDERING...
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Bottom Metadata Bar (Swapped Layout) -->
+                        <div
+                            class="glass-metadata-bar flex items-center justify-between px-5 py-3 border-t border-white/5 bg-zinc-900/40 backdrop-blur-md">
+                            <!-- Left: Metadata (Seed, Model, Scale) -->
+                            <div class="flex gap-6 border-r border-white/5 pr-6">
+                                <div class="flex flex-col">
+                                    <span class="text-[8px] font-bold text-zinc-600 tracking-widest uppercase"
+                                        data-i18n="seed_label">Seed</span>
+                                    <span class="text-[10px] text-zinc-400 font-mono">8829103</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-[8px] font-bold text-zinc-600 tracking-widest uppercase"
+                                        data-i18n="model_label">MODEL</span>
+                                    <span class="text-[10px] text-zinc-400 font-mono">UTOPIA-V1</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-[8px] font-bold text-zinc-600 tracking-widest uppercase"
+                                        data-i18n="dimensions">RESOLUTION</span>
+                                    <span class="text-[10px] text-zinc-400 font-mono">4K</span>
+                                </div>
+                            </div>
+
+                            <!-- Right: Prompt -->
+                            <div class="flex items-center gap-3 flex-1 justify-end overflow-hidden pl-4">
+                                <div class="text-right overflow-hidden">
+                                    <span
+                                        class="block text-[8px] font-bold text-zinc-600 tracking-widest uppercase mb-0.5"
+                                        data-i18n="prompt_label">Prompt</span>
+                                    <p id="current-prompt-display"
+                                        class="text-[11px] text-zinc-300 font-light truncate max-w-[350px] italic">
+                                        "让它更有电影感,加蓝色灯光..."</p>
+                                </div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右栏: 历史记录 (240px 宽度) -->
+        <aside class="w-60 flex flex-col border-l border-white/5 bg-[#111] z-20 overflow-hidden">
+            <!-- 标题栏 -->
+            <div class="px-4 py-4 border-b border-white/5">
+                <h3 class="text-xs font-semibold text-zinc-400 tracking-wider uppercase">历史记录</h3>
+            </div>
+
+            <!-- 历史列表 (可滚动) -->
+            <!-- 历史列表 (可滚动) -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
+                <!-- Dynamic history items will be inserted here -->
+            </div>
+            <div class="mt-2 text-[10px] text-zinc-600 font-mono">Yesterday</div>
+            </div>
+            </div>
+        </aside>
+
+    </main>
+
+
+
+
+
+    <!-- Sidebar Header -->
+    <div class="px-5 py-4 border-b border-white/5 flex items-center justify-between">
+        <span class="text-xs font-semibold text-zinc-400 tracking-wider uppercase" data-i18n="history">History</span>
+        <div class="flex gap-2">
+            <button class="p-1.5 rounded-md hover:bg-white/5 text-zinc-500 hover:text-white transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="1.5" d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+            </button>
+            <button class="p-1.5 rounded-md hover:bg-white/5 text-zinc-500 hover:text-white transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- History List (Scrollable) -->
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
+        <!-- Date Group: Today -->
+        <div>
+            <div class="text-[10px] font-bold text-zinc-500 mb-3 sticky top-0 bg-[#080808] py-1 z-10" data-i18n="today">
+                TODAY
+            </div>
+            <div class="space-y-3">
+                <div
+                    class="group relative rounded-lg overflow-hidden border border-white/10 aspect-video cursor-pointer hover:border-orange-500/50 transition-all">
+                    <img src="assets/images/hero-bg.jpg"
+                        class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <span class="text-[10px] text-white font-medium truncate">A cyberpunk
+                            detective...</span>
+                    </div>
+                </div>
+                <div
+                    class="group relative rounded-lg overflow-hidden border border-white/10 aspect-video cursor-pointer hover:border-orange-500/50 transition-all">
+                    <img src="assets/images/hero-bg.jpg"
+                        class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity grayscale">
+                    <div class="absolute bottom-2 right-2 bg-black/60 px-1.5 py-0.5 rounded text-[9px] text-white">
+                        FAILED</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Date Group: Yesterday -->
+        <div>
+            <div class="text-[10px] font-bold text-zinc-500 mb-3 sticky top-0 bg-[#080808] py-1 z-10"
+                data-i18n="yesterday">YESTERDAY
+            </div>
+            <div class="space-y-3">
+                <div
+                    class="group relative rounded-lg overflow-hidden border border-white/10 aspect-video cursor-pointer hover:border-orange-500/50 transition-all">
+                    <img src="assets/images/hero-bg.jpg"
+                        class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Footer: Stats & Actions -->
+    <div class="p-4 border-t border-white/5 bg-[#080808]">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2 text-xs text-zinc-400">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span><span data-i18n="credits">Credits</span>: 40</span>
+            </div>
+            <button class="text-[10px] text-orange-500 hover:text-orange-400 font-medium" data-i18n="buy_more">Buy
+                More</button>
+        </div>
+    </div>
+    </aside>
+
+    <!-- MAIN CONTENT: PREVIEW & DETAILS -->
+    <div class="flex-1 h-full flex flex-col overflow-y-auto relative bg-zinc-900/10">
+        <!-- Main Content Header -->
+        <header
+            class="h-16 flex items-center justify-between px-8 border-b border-white/5 bg-[#050505]/80 backdrop-blur sticky top-0 z-30">
+            <div class="flex items-center gap-4">
+                <button onclick="goBackToInput()"
+                    class="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group">
+                    <svg width="16" height="16" viewBox="0 0 24 24"
+                        class="group-hover:-translate-x-1 transition-transform">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5" d="M19 12H5m7-7l-7 7l7 7" />
+                    </svg>
+                    <span class="text-sm font-medium" data-i18n="back_to_create">Back to Create</span>
+                </button>
+                <div class="h-4 w-[1px] bg-white/10"></div>
+                <h2 class="text-sm font-medium text-white">Project #8291A</h2>
+            </div>
+
+            <div class="flex gap-3">
+                <button
+                    class="px-4 py-1.5 rounded-lg border border-white/10 text-xs font-medium text-zinc-300 hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5l5-5m-5 5V3" />
+                    </svg>
+                    <span data-i18n="export">Export</span>
+                </button>
+                <button onclick="openProEditor()"
+                    class="px-4 py-1.5 rounded-lg bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path
+                                d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z" />
+                            <path d="M10 14a2 2 0 1 1 0 4a2 2 0 0 1 0-4Z" />
+                            <circle cx="12" cy="12" r="2" transform="matrix(0 -1 -1 0 24 24)" />
+                            <path stroke-linecap="round" d="M14 16h5m-9-8H5m0 8h1m13-8h-1" />
+                        </g>
+                    </svg>
+                    <span data-i18n="edit_in_pro">Edit in Pro</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Content Area -->
+        <div class="p-8 max-w-7xl mx-auto w-full space-y-12">
+
+            <!-- Hero Player Section -->
+            <section>
+                <div
+                    class="aspect-video w-full bg-black rounded-xl border border-white/10 relative overflow-hidden group shadow-2xl">
+                    <div class="absolute inset-0 bg-zinc-900 bg-cover bg-center opacity-80">
+                    </div>
+                    <div
+                        class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors cursor-pointer">
+                        <div
+                            class="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white pl-1 hover:scale-110 transition-transform">
+                            <svg width="40" height="40" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-width="1.5"
+                                    d="M20.409 9.353a2.998 2.998 0 0 1 0 5.294L7.597 21.614C5.534 22.737 3 21.277 3 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Video Controls Overlay -->
+                    <div
+                        class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs font-mono text-zinc-300">00:04 / 00:15</div>
+                            <div class="flex gap-4">
+                                <iconify-icon icon="solar:maximize-linear" class="text-white cursor-pointer"
+                                    width="20"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prompt & Metadata Below Video -->
+                <div class="mt-6 flex flex-col md:flex-row gap-8 items-start">
+                    <div class="flex-1">
+                        <h3 class="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-3">Prompt</h3>
+                        <p class="text-base font-light text-zinc-200 leading-relaxed">
+                            "A cyberpunk detective standing in rain, neon reflections, 85mm lens, shallow depth of
+                            field, volumetric fog, cinematic lighting, 8k resolution, highly detailed textures..."
+                        </p>
+                    </div>
+                    <div class="w-full md:w-64 space-y-4">
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-xs text-zinc-500">Model</span>
+                            <span class="text-xs text-white">CinemaReal XL v4.2</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-xs text-zinc-500">Dimensions</span>
+                            <span class="text-xs text-white">3840 x 2160</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-xs text-zinc-500">Seed</span>
+                            <span class="text-xs font-mono text-zinc-400">49201948</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related Generations Grid -->
+            <section>
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-sm font-medium text-white">Related Variations</h3>
+                    <div class="flex bg-white/5 rounded-lg p-0.5">
+                        <button
+                            class="px-3 py-1 rounded-md bg-white/10 text-[10px] text-white font-medium shadow-sm">Grid</button>
+                        <button
+                            class="px-3 py-1 rounded-md hover:bg-white/5 text-[10px] text-zinc-400 font-medium transition-colors">List</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Grid Item 1 -->
+                    <div
+                        class="group relative aspect-[16/9] bg-zinc-900 rounded-lg overflow-hidden border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer">
+                        <img src="assets/images/hero-bg.jpg"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute top-2 right-2 bg-black/60 backdrop-blur px-1.5 py-0.5 rounded text-[9px] text-zinc-300"
+                            data-i18n="target_image">
+                            Target Image</div>
+                    </div>
+                    <!-- Grid Item 2 -->
+                    <div
+                        class="group relative aspect-[16/9] bg-zinc-900 rounded-lg overflow-hidden border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer">
+                        <img src="assets/images/hero-bg.jpg"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity hue-rotate-15">
+                        <div
+                            class="absolute top-2 right-2 bg-black/60 backdrop-blur px-1.5 py-0.5 rounded text-[9px] text-zinc-300">
+                            Var 1</div>
+                    </div>
+                    <!-- Grid Item 3 -->
+                    <div
+                        class="group relative aspect-[16/9] bg-zinc-900 rounded-lg overflow-hidden border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer">
+                        <img src="assets/images/hero-bg.jpg"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity hue-rotate-30">
+                        <div
+                            class="absolute top-2 right-2 bg-black/60 backdrop-blur px-1.5 py-0.5 rounded text-[9px] text-zinc-300">
+                            Var 2</div>
+                    </div>
+                    <!-- Add New Item -->
+                    <div
+                        class="group relative aspect-[16/9] bg-white/5 rounded-lg overflow-hidden border border-dashed border-white/10 hover:border-white/20 hover:bg-white/10 transition-all cursor-pointer flex flex-col items-center justify-center gap-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+                            <svg width="16" height="16" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M12 5v14m-7-7h14" />
+                            </svg>
+                        </div>
+                        <span
+                            class="text-[10px] text-zinc-500 group-hover:text-zinc-300 uppercase tracking-wider font-medium"
+                            data-i18n="create_variation">Create
+                            Variation</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer Spacer -->
+            <div class="h-10"></div>
+        </div>
+    </div>
+    </main>
+
+    <!-- VIEW 4: PRO EDITOR (Cinematic Dark Style) -->
+    <main id="view-editor"
+        class="view-section h-screen w-screen bg-black text-white flex flex-col overflow-hidden absolute top-0 left-0 z-50 hidden font-sans">
+
+        <!-- 1. Header (Cinematic) -->
+        <header
+            class="h-14 border-b border-white/10 flex items-center justify-between px-6 bg-black/80 backdrop-blur-xl shrink-0 z-30">
+            <!-- Left -->
+            <div class="flex items-center gap-6">
+                <!-- Back Button (Unified Style from Page 2) -->
+                <button onclick="goBackToResult()"
+                    class="p-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 text-zinc-400 hover:text-white transition-all group backdrop-blur-md">
+                    <svg width="20" height="20" viewBox="0 0 24 24"
+                        class="group-hover:-translate-x-0.5 transition-transform">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                </button>
+                <div class="h-4 w-px bg-white/10"></div>
+                <div>
+                    <h1 class="text-sm font-bold text-white tracking-wide">MASTER_SEQUENCE_V4</h1>
+                    <div class="flex items-center gap-2 mt-0.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                        <span class="text-[10px] text-zinc-500 font-mono tracking-widest uppercase">Live Editing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center: Timecode -->
+            <div class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+                <span class="text-xl font-mono font-bold text-white tracking-widest text-shadow-glow">00:00:14:23</span>
+                <span class="text-[9px] text-zinc-600 font-mono tracking-[0.2em] uppercase">Total Duration</span>
+            </div>
+
+            <!-- Right -->
+            <div class="flex items-center gap-4">
+                <!-- Language Switcher (Consistent Style) -->
+                <button onclick="toggleLanguage()"
+                    class="flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/5 group">
+                    <span
+                        class="lang-switcher-text text-[10px] font-bold text-zinc-400 group-hover:text-white">EN</span>
+                </button>
+
+                <!-- Export Video (Branded Style) -->
+                <button
+                    class="px-5 py-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white text-xs font-bold rounded-full hover:from-orange-500 hover:to-orange-400 transition-all flex items-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 btn-beam">
+                    <iconify-icon icon="solar:export-bold" width="14"></iconify-icon>
+                    <span data-i18n="export_video">EXPORT VIDEO</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 2. Main Workspace -->
+        <div class="flex-1 flex min-h-0 relative">
+
+            <!-- Left: Assets (Glassmorphism) -->
+            <aside class="w-72 bg-[#050505] border-r border-white/5 flex flex-col shrink-0 z-20">
+                <div class="p-4 border-b border-white/5">
+                    <h3 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4">Project Assets</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div
+                            class="aspect-video bg-zinc-900 rounded-lg border border-white/5 overflow-hidden relative group cursor-pointer hover:border-orange-500/50 transition-all">
+                            <img src="assets/images/hero-bg.jpg"
+                                class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/80">Scene_01</div>
+                        </div>
+                        <div
+                            class="aspect-video bg-zinc-900 rounded-lg border border-white/5 overflow-hidden relative group cursor-pointer hover:border-orange-500/50 transition-all">
+                            <img src="assets/images/hero-bg.jpg"
+                                class="w-full h-full object-cover opacity-60 hue-rotate-30 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/80">Scene_02</div>
+                        </div>
+                        <div
+                            class="aspect-video bg-zinc-900 rounded-lg border border-white/5 overflow-hidden relative group cursor-pointer hover:border-orange-500/50 transition-all">
+                            <img src="assets/images/hero-bg.jpg"
+                                class="w-full h-full object-cover opacity-60 grayscale group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/80">Ref_Img</div>
+                        </div>
+                        <div
+                            class="aspect-video bg-zinc-900 rounded-lg border border-white/5 flex items-center justify-center text-zinc-600 hover:text-white hover:border-orange-500/50 transition-all cursor-pointer">
+                            <iconify-icon icon="solar:add-circle-linear" width="24"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 p-4">
+                    <h3 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">Audio Design</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3 p-2 rounded bg-white/5 hover:bg-white/10 cursor-pointer">
+                            <iconify-icon icon="solar:music-note-bold" class="text-orange-500"></iconify-icon>
+                            <div class="flex-1 min-w-0">
+                                <div class="text-[11px] font-medium text-zinc-200 truncate">Cyberpunk_Ambient.wav</div>
+                                <div class="text-[9px] text-zinc-500">2:14 • Stereo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center: Viewer (16:9 Focus) -->
+            <div class="flex-1 bg-black flex flex-col relative z-10">
+                <div
+                    class="flex-1 flex items-center justify-center p-12 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900 to-black">
+                    <!-- 16:9 Container -->
+                    <div
+                        class="aspect-video w-full max-w-4xl bg-black shadow-2xl relative border border-white/10 group rounded-xl overflow-hidden ring-1 ring-white/5">
+                        <div class="absolute inset-0 bg-cover bg-center"
+                            style="background-image: url('assets/images/hero-bg.jpg')"></div>
+
+                        <!-- Overlay Guidelines -->
+                        <div
+                            class="absolute inset-0 border-[40px] border-black/80 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 border border-white/20 opacity-0 group-hover:opacity-20 transition-opacity">
+                        </div>
+
+                        <!-- HUD -->
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span
+                                class="px-1.5 py-0.5 rounded bg-black/50 backdrop-blur border border-white/10 text-[9px] font-mono text-zinc-400">REC.709</span>
+                            <span
+                                class="px-1.5 py-0.5 rounded bg-black/50 backdrop-blur border border-white/10 text-[9px] font-mono text-zinc-400">4K
+                                UHD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transport Bar -->
+                <div
+                    class="h-16 border-t border-white/5 bg-[#050505]/90 backdrop-blur flex items-center justify-center gap-8">
+                    <button class="icon-btn text-zinc-500 hover:text-white transition-colors"><iconify-icon
+                            icon="solar:skip-previous-bold" width="20"></iconify-icon></button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all">
+                        <iconify-icon icon="solar:play-bold" width="18" class="ml-0.5"></iconify-icon>
+                    </button>
+                    <button class="icon-btn text-zinc-500 hover:text-white transition-colors"><iconify-icon
+                            icon="solar:skip-next-bold" width="20"></iconify-icon></button>
+                </div>
+            </div>
+
+            <!-- Right: Inspector (Minimal) -->
+            <aside class="w-64 bg-[#050505] border-l border-white/5 flex flex-col shrink-0 z-20">
+                <div class="p-4 border-b border-white/5">
+                    <h3 class="text-xs font-bold text-white uppercase tracking-wider">Properties</h3>
+                </div>
+                <!-- Dynamic Content Placeholder -->
+                <div class="p-4 flex flex-col gap-6 opacity-50 pointer-events-none filter grayscale">
+                    <div class="space-y-2">
+                        <div class="text-[10px] text-zinc-500">OPACITY</div>
+                        <div class="h-1 bg-zinc-800 rounded-full w-full">
+                            <div class="w-3/4 h-full bg-zinc-600 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-[10px] text-zinc-500">SCALE</div>
+                        <div class="h-1 bg-zinc-800 rounded-full w-full">
+                            <div class="w-1/2 h-full bg-zinc-600 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded border border-white/5 bg-white/5 text-center text-xs text-zinc-500">
+                        Select a clip to edit
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- 3. Packed Timeline (The "Strip") -->
+        <div class="h-48 bg-[#050505] border-t border-white/10 flex flex-col relative z-30">
+            <!-- Timeline Index/Playhead -->
+            <div class="h-6 bg-[#080808] border-b border-white/5 flex relative">
+                <div
+                    class="absolute left-0 w-full h-full flex items-end px-4 gap-[200px] text-[9px] font-mono text-zinc-600 select-none pointer-events-none">
+                    <span>0:00</span><span>0:15</span><span>0:30</span><span>0:45</span><span>1:00</span>
+                </div>
+                <!-- Orange Playhead Marker -->
+                <div
+                    class="absolute top-0 bottom-0 left-[320px] w-px bg-orange-500 h-[100vh] z-50 pointer-events-none shadow-[0_0_10px_rgba(249,115,22,0.5)]">
+                    <div class="absolute -top-0 -left-1.5 w-3 h-3 bg-orange-500 rotate-45"></div>
+                </div>
+            </div>
+
+            <!-- Track Container -->
+            <div class="flex-1 overflow-x-auto overflow-y-hidden px-4 py-4 flex items-center gap-1 bg-[#020202] relative"
+                id="timeline-track">
+                <!-- Helper: Timeline Start Spacer -->
+                <div class="w-[50px] shrink-0 h-full border-r border-white/5"></div>
+
+                <!-- Clip 1 (Active) -->
+                <!-- Use oncontextmenu for Right Click -->
+                <div oncontextmenu="showClipMenu(event, 'Scene_01_Intro')"
+                    class="timeline-clip relative h-28 aspect-video bg-zinc-900 rounded-md border-2 border-orange-500 overflow-hidden cursor-pointer hover:scale-105 transition-transform shrink-0 group shadow-lg shadow-orange-900/20">
+                    <div class="absolute inset-0 bg-cover bg-center"
+                        style="background-image: url('assets/images/hero-bg.jpg')"></div>
+                    <div class="absolute bottom-0 inset-x-0 p-1.5 bg-gradient-to-t from-black/90 to-transparent">
+                        <div class="text-[10px] font-bold text-white truncate">Scene_01_Intro</div>
+                        <div class="text-[8px] font-mono text-orange-400">00:05:00</div>
+                    </div>
+                    <!-- Hover Hint -->
+                    <div
+                        class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[1px]">
+                        <iconify-icon icon="solar:menu-dots-bold" class="text-white drop-shadow-lg"
+                            width="24"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Clip 2 -->
+                <div oncontextmenu="showClipMenu(event, 'Scene_02_Action')"
+                    class="timeline-clip relative h-28 aspect-video bg-zinc-900 rounded-md border border-white/10 overflow-hidden cursor-pointer hover:border-white hover:scale-105 transition-all shrink-0 group">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-70 group-hover:opacity-100"
+                        style="background-image: url('assets/images/hero-bg.jpg')"></div>
+                    <!-- Use different seed if possible -->
+                    <div class="absolute bottom-0 inset-x-0 p-1.5 bg-gradient-to-t from-black/90 to-transparent">
+                        <div class="text-[10px] font-bold text-zinc-300 group-hover:text-white truncate">Scene_02_Action
+                        </div>
+                        <div class="text-[8px] font-mono text-zinc-500">00:03:12</div>
+                    </div>
+                </div>
+
+                <!-- Clip 3 -->
+                <div oncontextmenu="showClipMenu(event, 'Scene_03_Dialogue')"
+                    class="timeline-clip relative h-28 aspect-video bg-zinc-900 rounded-md border border-white/10 overflow-hidden cursor-pointer hover:border-white hover:scale-105 transition-all shrink-0 group">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-70 group-hover:opacity-100 hue-rotate-60"
+                        style="background-image: url('assets/images/hero-bg.jpg')"></div>
+                    <div class="absolute bottom-0 inset-x-0 p-1.5 bg-gradient-to-t from-black/90 to-transparent">
+                        <div class="text-[10px] font-bold text-zinc-300 group-hover:text-white truncate">
+                            Scene_03_Dialogue</div>
+                        <div class="text-[8px] font-mono text-zinc-500">00:06:00</div>
+                    </div>
+                </div>
+
+                <!-- Clip 4 -->
+                <div oncontextmenu="showClipMenu(event, 'Scene_04_End')"
+                    class="timeline-clip relative h-28 aspect-video bg-zinc-900 rounded-md border border-white/10 overflow-hidden cursor-pointer hover:border-white hover:scale-105 transition-all shrink-0 group">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-70 group-hover:opacity-100 grayscale"
+                        style="background-image: url('assets/images/hero-bg.jpg')"></div>
+                    <div class="absolute bottom-0 inset-x-0 p-1.5 bg-gradient-to-t from-black/90 to-transparent">
+                        <div class="text-[10px] font-bold text-zinc-300 group-hover:text-white truncate">Scene_04_End
+                        </div>
+                        <div class="text-[8px] font-mono text-zinc-500">00:04:15</div>
+                    </div>
+                </div>
+
+                <!-- Add Button -->
+                <div
+                    class="h-28 w-16 rounded-md border border-dashed border-white/10 hover:border-white/30 bg-white/[0.02] hover:bg-white/[0.05] flex items-center justify-center cursor-pointer transition-all shrink-0">
+                    <iconify-icon icon="solar:add-circle-linear" class="text-zinc-600" width="24"></iconify-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. RIGHT CLICK CONTEXT MENU (Floating) -->
+        <!-- Popover style, position adjusted via JS -->
+        <div id="clip-context-menu" class="hidden fixed z-[100] w-[350px]" style="top: 0; left: 0;">
+            <div
+                class="bg-[#111]/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                <!-- Header -->
+                <div class="h-10 border-b border-white/5 flex items-center justify-between px-3 bg-white/5">
+                    <span id="menu-clip-title" class="text-xs font-bold text-white truncate max-w-[200px]">Scene
+                        Name</span>
+                    <button onclick="closeClipMenu()"
+                        class="text-zinc-500 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10">
+                        <iconify-icon icon="solar:close-circle-bold" width="16"></iconify-icon>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="p-2 space-y-1">
+                    <!-- Spatial Video Option -->
+                    <button
+                        class="w-full p-2 rounded-lg flex items-center gap-3 hover:bg-white/10 text-left transition-colors group">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center text-purple-300">
+                            <iconify-icon icon="solar:glasses-bold" width="16"></iconify-icon>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-[11px] font-bold text-white group-hover:text-purple-300"
+                                data-i18n="spatial_gen">Spatial Video Gen</div>
+                            <div class="text-[9px] text-zinc-500" data-i18n="spatial_desc">Vision Pro / VR Format</div>
+                        </div>
+                    </button>
+
+                    <!-- History Iterations -->
+                    <div class="pt-2 pb-1 px-1">
+                        <div class="text-[9px] font-bold text-zinc-600 uppercase tracking-widest mb-1.5"
+                            data-i18n="version_history">Version History</div>
+                        <div class="space-y-0.5">
+                            <div
+                                class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer text-[10px]">
+                                <span class="text-orange-400 font-mono">v4.0</span>
+                                <span class="text-zinc-400" data-i18n="current_ver">Current</span>
+                            </div>
+                            <div
+                                class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer text-[10px] opacity-60 hover:opacity-100">
+                                <span class="text-zinc-500 font-mono">v3.0</span>
+                                <span class="text-zinc-500" data-i18n="color_adj">Color Adj...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="p-2 bg-black/20 border-t border-white/5 flex gap-2">
+                    <button class="flex-1 py-1.5 rounded bg-white text-black text-[10px] font-bold hover:bg-zinc-200"
+                        data-i18n="open_options">Open Options</button>
+                    <button onclick="closeClipMenu()"
+                        class="flex-1 py-1.5 rounded bg-white/5 text-zinc-300 text-[10px] font-bold hover:bg-white/10"
+                        data-i18n="close_btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="timeline-clip relative w-64 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_04_CITY
+        </div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-yellow-500"></div>
+    </div>
+    <div class="timeline-clip relative w-44 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e85?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_05_CAR
+        </div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500"></div>
+    </div>
+    <div class="timeline-clip relative w-64 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af090?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">
+            SC_06_BUILDING</div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-orange-500"></div>
+    </div>
+    <div class="timeline-clip relative w-36 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_07_RUN
+        </div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-cyan-500"></div>
+    </div>
+    <div class="timeline-clip relative w-48 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1522156329643-3e45c6b3c546?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_08_FIGHT
+        </div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-pink-500"></div>
+    </div>
+    <div class="timeline-clip relative w-40 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_09_END
+        </div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-indigo-500"></div>
+    </div>
+    <div class="timeline-clip relative w-56 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+        oncontextmenu="showClipMenu(event, this)">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url('https://images.unsplash.com/photo-1531746790731-6c0879fef923?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+        </div>
+        <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_10_CREDITS
+        </div>
+        <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-teal-500"></div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Video Track 2 -->
+    <div class="relative">
+        <div class="flex items-center gap-1 mb-1">
+            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">视频轨道 2</div>
+        </div>
+        <div class="flex relative h-14 items-center gap-1">
+            <div class="timeline-clip relative w-48 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+                oncontextmenu="showClipMenu(event, this)">
+                <div class="absolute inset-0 bg-cover bg-center opacity-40"
+                    style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e85?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+                </div>
+                <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_11_OVERLAY
+                </div>
+                <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-500"></div>
+            </div>
+            <div class="timeline-clip relative w-64 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+                oncontextmenu="showClipMenu(event, this)">
+                <div class="absolute inset-0 bg-cover bg-center opacity-40"
+                    style="background-image: url('https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+                </div>
+                <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">SC_12_TITLE
+                </div>
+                <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-purple-500"></div>
+            </div>
+            <div class="timeline-clip relative w-56 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+                oncontextmenu="showClipMenu(event, this)">
+                <div class="absolute inset-0 bg-cover bg-center opacity-40"
+                    style="background-image: url('https://images.unsplash.com/photo-1522156329643-3e45c6b3c546?auto=format&amp;fit=crop&amp;w=500&amp;q=60')">
+                </div>
+                <div class="absolute bottom-1 left-2 text-[9px] font-medium text-white/90">
+                    SC_13_TRANSITION</div>
+                <div class="absolute top-1 right-1 w-2 h-2 rounded-full bg-green-500"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Track -->
+    <div class="relative">
+        <div class="flex items-center gap-1 mb-1">
+            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">音频轨道</div>
+        </div>
+        <div class="flex relative h-8 items-center">
+            <div class="w-[600px] h-full bg-teal-900/30 border border-teal-500/20 rounded-lg relative overflow-hidden">
+                <div class="absolute inset-y-0 left-0 right-0 flex items-center gap-[2px] opacity-40 px-2">
+                    <div class="w-1 h-3 bg-teal-400"></div>
+                    <div class="w-1 h-5 bg-teal-400"></div>
+                    <div class="w-1 h-2 bg-teal-400"></div>
+                    <div class="w-1 h-6 bg-teal-400"></div>
+                    <div class="w-1 h-3 bg-teal-400"></div>
+                    <div class="w-1 h-4 bg-teal-400"></div>
+                    <div class="w-1 h-2 bg-teal-400"></div>
+                    <div class="w-1 h-5 bg-teal-400"></div>
+                    <div class="w-1 h-3 bg-teal-400"></div>
+                    <div class="w-1 h-4 bg-teal-400"></div>
+                </div>
+                <span
+                    class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-teal-200">BGM_Synth_Wave.wav</span>
+            </div>
+            <div
+                class="w-[400px] h-full bg-indigo-900/30 border border-indigo-500/20 rounded-lg relative overflow-hidden">
+                <div class="absolute inset-y-0 left-0 right-0 flex items-center gap-[2px] opacity-40 px-2">
+                    <div class="w-1 h-4 bg-indigo-400"></div>
+                    <div class="w-1 h-6 bg-indigo-400"></div>
+                    <div class="w-1 h-3 bg-indigo-400"></div>
+                    <div class="w-1 h-5 bg-indigo-400"></div>
+                </div>
+                <span class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-indigo-200">SFX_Effects.mp3</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Effects Track -->
+    <div class="relative">
+        <div class="flex items-center gap-1 mb-1">
+            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">特效轨道</div>
+        </div>
+        <div class="flex relative h-8 items-center">
+            <div class="timeline-clip relative w-32 h-8 bg-zinc-800/60 border border-yellow-500/30 rounded-lg overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+                oncontextmenu="showClipMenu(event, this)">
+                <div class="absolute inset-0 flex items-center justify-center gap-1">
+                    <iconify-icon icon="solar:blur-linear" class="text-yellow-400" width="14"></iconify-icon>
+                    <div class="text-[9px] font-medium text-yellow-200">模糊</div>
+                </div>
+            </div>
+            <div class="timeline-clip relative w-36 h-8 bg-zinc-800/60 border border-orange-500/30 rounded-lg overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+                oncontextmenu="showClipMenu(event, this)">
+                <div class="absolute inset-0 flex items-center justify-center gap-1">
+                    <iconify-icon icon="solar:sun-2-linear" class="text-orange-400" width="14"></iconify-icon>
+                    <div class="text-[9px] font-medium text-orange-200">光晕</div>
+                </div>
+            </div>
+            <div class="timeline-clip relative w-40 h-8 bg-zinc-800/60 border border-pink-500/30 rounded-lg overflow-hidden cursor-pointer hover:brightness-110 transition-all"
+                oncontextmenu="showClipMenu(event, this)">
+                <div class="absolute inset-0 flex items-center justify-center gap-1">
+                    <iconify-icon icon="solar:stars-minimalistic-linear" class="text-pink-400"
+                        width="14"></iconify-icon>
+                    <div class="text-[9px] font-medium text-pink-200">粒子</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Modified Clip Context Window -->
+    <div id="clip-window"
+        class="hidden absolute z-50 bg-[#161616]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-64 animate-enter ring-1 ring-white/5">
+        <div class="p-3 border-b border-white/5 flex items-center justify-between">
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">镜头选项</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" class="text-zinc-500 hover:text-white cursor-pointer"
+                onclick="closeClipWindow()">
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+                </g>
+            </svg>
+        </div>
+        <div class="p-2 space-y-1">
+            <!-- 绌洪棿瑙嗛 -->
+            <div
+                class="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
+                <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
+                    <iconify-icon icon="solar:cube-minimalistic-linear" width="16"></iconify-icon>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-white">空间视频</div>
+                    <div class="text-[9px] text-zinc-500">Create 3D depth map</div>
+                </div>
+            </div>
+
+            <!-- 鍘嗗彶鐢熸垚璁板綍 -->
+            <div
+                class="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
+                <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24">
+                        <g fill="none">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5" d="M12 8v4l2.5 2.5" />
+                            <path fill="currentColor"
+                                d="m5.604 5.604l-.53-.53zM4.338 6.871l-.75.003a.75.75 0 0 0 .746.747zm2.542.762a.75.75 0 1 0 .007-1.5zM5.075 4.321a.75.75 0 1 0-1.5.008zm-1.248 6.464a.75.75 0 1 0-1.486-.204zm15.035-5.647c-3.82-3.82-9.993-3.86-13.788-.064l1.06 1.06c3.2-3.199 8.423-3.18 11.668.064zM5.138 18.862c3.82 3.82 9.993 3.86 13.788.064l-1.06-1.06c-3.2 3.199-8.423 3.18-11.668-.064zm13.788.064c3.795-3.795 3.756-9.968-.064-13.788l-1.06 1.06c3.244 3.245 3.263 8.468.064 11.668zM5.074 5.074L3.807 6.34L4.868 7.4l1.266-1.266zm-.74 2.547l2.546.012l.007-1.5l-2.545-.012zm.754-.754L5.075 4.32l-1.5.008l.013 2.545zM2.34 10.58a9.81 9.81 0 0 0 2.797 8.281l1.06-1.06a8.31 8.31 0 0 1-2.371-7.017z" />
+                        </g>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-white">Creation History</div>
+                    <div class="text-[9px] text-zinc-500">View previous creations</div>
+                </div>
+            </div>
+
+            <!-- 绮句慨闀滃ご -->
+            <div
+                class="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
+                <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                    <iconify-icon icon="solar:sparkling-linear" width="16"></iconify-icon>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-white">精修镜头</div>
+                    <div class="text-[9px] text-zinc-500">放大或重新绘制</div>
+                </div>
+            </div>
+
+            <!-- 瀵煎嚭 -->
+            <div
+                class="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
+                <div class="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M3 15c0 2.828 0 4.243.879 5.121C4.757 21 6.172 21 9 21h6c2.828 0 4.243 0 5.121-.879C21 19.243 21 17.828 21 15M12 3v13m0 0l4-4.375M12 16l-4-4.375" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-white">导出</div>
+                    <div class="text-[9px] text-zinc-500">导出当前镜头</div>
+                </div>
+            </div>
+
+            <!-- 澶嶅埗 -->
+            <div
+                class="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
+                <div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path
+                                d="M6 11c0-2.828 0-4.243.879-5.121C7.757 5 9.172 5 12 5h3c2.828 0 4.243 0 5.121.879C21 6.757 21 8.172 21 11v5c0 2.828 0 4.243-.879 5.121C19.243 22 17.828 22 15 22h-3c-2.828 0-4.243 0-5.121-.879C6 20.243 6 18.828 6 16z" />
+                            <path d="M6 19a3 3 0 0 1-3-3v-6c0-3.771 0-5.657 1.172-6.828S7.229 2 11 2h4a3 3 0 0 1 3 3" />
+                        </g>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-white">复制</div>
+                    <div class="text-[9px] text-zinc-500">复制镜头到剪贴板</div>
+                </div>
+            </div>
+
+            <div class="h-[1px] bg-white/5 my-1"></div>
+
+            <!-- 鍒犻櫎闀滃ご -->
+            <div
+                class="flex items-center gap-3 p-2 rounded-lg hover:bg-red-500/10 cursor-pointer transition-colors group">
+                <svg width="16" height="16" viewBox="0 0 24 24" class="text-zinc-500 group-hover:text-red-400">
+                    <g fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round"
+                            d="M20.5 6h-17m15.333 2.5l-.46 6.9c-.177 2.654-.265 3.981-1.13 4.79s-2.196.81-4.856.81h-.774c-2.66 0-3.991 0-4.856-.81c-.865-.809-.954-2.136-1.13-4.79l-.46-6.9M9.5 11l.5 5m4.5-5l-.5 5" />
+                        <path
+                            d="M6.5 6h.11a2 2 0 0 0 1.83-1.32l.034-.103l.097-.291c.083-.249.125-.373.18-.479a1.5 1.5 0 0 1 1.094-.788C9.962 3 10.093 3 10.355 3h3.29c.262 0 .393 0 .51.019a1.5 1.5 0 0 1 1.094.788c.055.106.097.23.18.479l.097.291A2 2 0 0 0 17.5 6" />
+                    </g>
+                </svg>
+                <span class="text-xs text-zinc-400 group-hover:text-red-400">删除镜头</span>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    </main>
+
+    <!-- Performance Manager First -->
+    <script src="js/perf.js"></script>
+    <!-- Background Effects -->
+    <script src="shader.js"></script>
+    <script src="waves.js"></script>
+    <script src="bubbles.js"></script>
+    <script src="dots.js"></script>
+    <script src="particles-generation.js"></script>
+    <!-- App Logic -->
+    <script src="js/app.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="i18n.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/dot-pattern.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- Style Unifier - Apply unified styles automatically -->
+    <script src="js/style-unifier.js"></script>
+    <input type="file" id="direct-file-input" class="hidden" multiple>
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="hideLoginModal()"></div>
+        <div class="glass-premium w-full max-w-md pt-16 pb-12 px-12 rounded-[2.5rem] relative transform transition-all duration-500 scale-90 opacity-0"
+            id="login-modal-content">
+            <!-- Close Button -->
+            <button onclick="hideLoginModal()"
+                class="absolute top-6 right-6 p-2 rounded-full hover:bg-white/5 text-zinc-500 hover:text-white transition-all">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Logo & Title Section (Balanced Rhythm) -->
+            <div class="text-center mb-14">
+                <div class="mb-10 group-hover:scale-105 transition-transform duration-1000">
+                    <img src="logo.png" alt="Logo"
+                        class="h-9 w-auto mx-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.06)]">
+                </div>
+                <h3 class="flex flex-nowrap items-center justify-center gap-x-2.5 text-center px-4 whitespace-nowrap">
+                    <span style="font-family: 'Geist', sans-serif;"
+                        class="text-zinc-500 font-medium text-xl tracking-tight" data-i18n="welcome_greeting">Welcome
+                        to</span>
+                    <span style="font-family: 'Syne', sans-serif;"
+                        class="text-xl font-normal text-white tracking-[0.15em] uppercase bg-gradient-to-br from-white via-orange-100 to-orange-300 bg-clip-text text-transparent drop-shadow-sm"
+                        data-i18n="brand_name">MOVIE UTOPIA</span>
+                </h3>
+            </div>
+
+            <!-- Unified Form -->
+            <div id="login-form-container" class="space-y-4">
+                <!-- Integrated Access Key Design (Primary Focus - Now Top) -->
+                <div class="relative group mb-8" id="key-component-container">
+                    <div
+                        class="btn-shine flex items-center bg-gradient-to-r from-orange-600 to-orange-500 rounded-2xl py-2.5 pl-6 gap-4 hover:from-orange-500 hover:to-orange-400 hover:shadow-[0_0_40px_rgba(255,107,53,0.35)] transition-all duration-700 shadow-lg shadow-orange-600/20 overflow-hidden relative">
+                        <span class="shine-layer opacity-20"></span>
+                        <div class="energy-line"></div>
+
+                        <!-- Left: Label (Luxe Minimalist) -->
+                        <span
+                            class="relative z-10 text-[13px] font-black text-white/90 tracking-[0.3em] uppercase whitespace-nowrap"
+                            data-i18n="access_key">ACCESS KEY</span>
+
+                        <!-- Middle: Inset Dot Indicator Area -->
+                        <div class="flex-1 relative z-10 h-12">
+                            <div
+                                class="absolute inset-0 bg-black/60 rounded-xl shadow-[inset_0_2px_12px_rgba(0,0,0,0.9)] border border-white/5 pointer-events-none">
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center gap-2.5 px-3 pointer-events-none"
+                                id="key-dots-container">
+                                <div class="w-2 h-2 rounded-full bg-orange-950/50 border border-orange-500/10 transition-all duration-300"
+                                    data-dot="1"></div>
+                                <div class="w-2 h-2 rounded-full bg-orange-950/50 border border-orange-500/10 transition-all duration-300"
+                                    data-dot="2"></div>
+                                <div class="w-2 h-2 rounded-full bg-orange-950/50 border border-orange-500/10 transition-all duration-300"
+                                    data-dot="3"></div>
+                                <div class="w-2 h-2 rounded-full bg-orange-950/50 border border-orange-500/10 transition-all duration-300"
+                                    data-dot="4"></div>
+                                <div class="w-2 h-2 rounded-full bg-orange-950/50 border border-orange-500/10 transition-all duration-300"
+                                    data-dot="5"></div>
+                                <div class="w-2 h-2 rounded-full bg-orange-950/50 border border-orange-500/10 transition-all duration-300"
+                                    data-dot="6"></div>
+                            </div>
+
+                            <input type="password" id="login-access-key" maxlength="6"
+                                class="absolute inset-0 w-full opacity-0 cursor-text z-20 focus:outline-none"
+                                oninput="updateKeyDots(this.value)">
+                        </div>
+
+                        <!-- Right: Master Unlocked Trigger -->
+                        <button onclick="handleLoginSubmit()" id="btn-master-unlock"
+                            class="relative z-30 pr-3 pl-1 text-white hover:text-white transition-all duration-300 transform active:scale-95 group/key-icon">
+                            <div
+                                class="absolute inset-0 bg-white/20 rounded-full blur-md opacity-0 group-hover/key-icon:opacity-100 transition-opacity">
+                            </div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="relative z-10 lock-icon" style="overflow: visible;">
+                                <path d="M7 11V7a5 5 0 0 1 9.9-1" class="lock-shackle" />
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M12 16v3" />
+                                <path d="M8 11v-4a4 4 0 0 1 8 0v4" opacity="0" /> <!-- Reference path -->
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sign In Button (Following Access Key - Luxe Ghost Style) -->
+                <button onclick="handleLoginSubmit()" id="btn-login-submit"
+                    class="group relative w-full py-4 bg-white/[0.02] border border-white/5 hover:bg-white/[0.08] text-zinc-500 hover:text-white font-bold rounded-xl transition-all duration-500 active:scale-[0.98] flex items-center justify-center gap-3 overflow-hidden">
+                    <span class="btn-text relative z-10" data-i18n="sign_in">Sign In</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        class="relative z-10 opacity-20 group-hover:opacity-100 transition-all group-hover:translate-x-1.5 duration-500">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Standard Login Fields (Hidden by default) -->
+                <div id="standard-login-fields"
+                    class="space-y-4 hidden overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="space-y-1.5 opacity-40">
+                        <label class="text-[10px] font-bold text-zinc-500 tracking-widest uppercase ml-1"
+                            data-i18n="email">Email Address</label>
+                        <input type="email" placeholder="name@example.com" disabled
+                            class="w-full bg-white/[0.03] border border-white/5 rounded-2xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none cursor-not-allowed">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider & Social Logins (Measured Spacing) -->
+            <div id="social-login-section" class="mt-12 space-y-8 animate-enter delay-300">
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-white/5"></div>
+                    </div>
+                    <div class="relative flex justify-center text-[10px] font-bold tracking-widest uppercase"><span
+                            class="bg-[#0d0d0d] px-4 text-zinc-700" data-i18n="or_continue_with">Or continue with</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button
+                        class="flex items-center justify-center gap-3 py-3.5 bg-white/[0.03] border border-white/5 rounded-2xl hover:bg-white/5 transition-all group">
+                        <svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor"
+                            class="text-white/60 group-hover:text-white transition-colors">
+                            <path
+                                d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+                        </svg>
+                    </button>
+                    <button
+                        class="flex items-center justify-center gap-3 py-3.5 bg-white/[0.03] border border-white/5 rounded-2xl hover:bg-white/5 transition-all group">
+                        <svg width="18" height="18" viewBox="0 0 488 512" fill="currentColor"
+                            class="text-white/60 group-hover:text-white transition-colors">
+                            <path
+                                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h233.7c2.2 12.1 6.3 24.2 6.3 40.6z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <p class="text-center text-[10px] font-bold tracking-widest uppercase text-zinc-600 mt-8">
+                <span data-i18n="no_account">Don't have an account?</span>
+                <button class="text-orange-500 hover:text-orange-400 ml-1" data-i18n="sign_up">Sign Up</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Scripts: Removed duplicate script tags to fix "Identifier already declared" errors -->
+    <!-- Scripts are already loaded earlier in the document -->
+</body>
+
+</html>

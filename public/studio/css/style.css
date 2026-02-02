@@ -1,0 +1,319 @@
+:root {
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Grotesk', monospace;
+    --cursor-x: 50%;
+    --cursor-y: 50%;
+
+    /* Enhanced Color Palette - Cinematic Industrial */
+    --color-primary: #ff6b35;
+    --color-secondary: #004e89;
+    --color-accent: #ffd23f;
+    --color-bg-primary: #0a0a0a;
+    --color-bg-secondary: #141414;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #a3a3a3;
+    --color-border: rgba(255, 255, 255, 0.12);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.spotlight-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: radial-gradient(circle 800px at var(--cursor-x) var(--cursor-y),
+            rgba(255, 107, 53, 0.08) 0%,
+            rgba(0, 78, 137, 0.06) 40%,
+            transparent 80%);
+    mix-blend-mode: screen;
+    transition: opacity 0.3s ease;
+}
+
+/* Spotlight only shows on landing page */
+body:not(.on-landing) .spotlight-overlay {
+    display: none;
+}
+
+.bg-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+}
+
+/* Background Canvases */
+.canvas-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+
+/* Landing: Raymarching (New from shadcn.io) */
+body.state-landing #hero-canvas,
+body.on-landing #hero-canvas {
+    opacity: 1;
+}
+
+/* Landing: Prism (Disabled in favor of Raymarching) */
+/* body.state-landing #prism-canvas,
+body.on-landing #prism-canvas {
+    opacity: 1;
+} */
+
+/* Input & Result: Dot Pattern (New from shadcn.io) */
+body.state-input #dot-pattern-canvas,
+body.state-result #dot-pattern-canvas {
+    opacity: 1;
+}
+
+/* Input: Bubbles (Disabled in favor of Dot Pattern) */
+/* body.state-input #bubbles-canvas {
+    opacity: 1;
+} */
+
+/* Result: Dots (Disabled in favor of Dot Pattern) */
+/* body.state-result #dots-canvas {
+    opacity: 1;
+} */
+
+/* Legacy support - Cleaned up to avoid conflicts */
+/* body.on-landing #waves-canvas {
+    opacity: 1;
+} */
+
+/* Content stays above shader */
+main,
+.view-section,
+nav {
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Subtitle transparency */
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.delay-100 {
+    animation-delay: 100ms;
+}
+
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}
+
+.glass-panel {
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Lite Mode Performance Optimizations */
+body.lite-mode .glass-panel {
+    backdrop-filter: blur(4px) saturate(120%);
+    -webkit-backdrop-filter: blur(4px) saturate(120%);
+    background: rgba(10, 10, 10, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.lite-mode .spotlight-overlay {
+    display: none !important;
+}
+
+body.lite-mode .bg-noise {
+    display: none !important;
+}
+
+body.lite-mode * {
+    text-shadow: none !important;
+}
+
+body.lite-mode .view-section {
+    transition: none !important;
+}
+
+.btn-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+}
+
+.btn-shimmer:hover::after {
+    animation: shimmer 1.5s infinite;
+}
+
+/* View Switching Logic */
+.view-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.view-section.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Timeline Specifics */
+.timeline-clip.selected {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.4),
+        0 4px 12px rgba(255, 107, 53, 0.2);
+    z-index: 10;
+    transform: scale(1.02);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-btn.active {
+    color: white;
+    border-bottom-color: white;
+}
+
+.tab-content {
+    display: none;
+    opacity: 1;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Enhanced Visual Effects */
+.btn-shimmer::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Improved text selection */
+::selection {
+    background: rgba(255, 107, 53, 0.3);
+    color: white;
+}
+
+/* Subtle glow effect for interactive elements */
+.interactive-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.interactive-glow:hover {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+/* Validation Feedback Animation */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-8px);
+    }
+}
+
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,123 @@
+    <!-- Navigation - Exact Copy from Main Site -->
+    <header class="fixed top-0 inset-x-0 z-50 glass backdrop-blur-xl border-b border-white/10">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Left: Logo -->
+                <div class="flex items-center gap-8">
+                    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                        <img src="logo.png" alt="Movie Utopia Logo" class="w-10 h-10 object-contain">
+                        <span class="text-xl font-serif font-extrabold text-white uppercase tracking-wide">
+                            MOVIE UTOPIA
+                        </span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex items-center gap-6" aria-label="Primary navigation">
+                        <a href="/#about" class="text-sm font-medium hover:text-primary transition-colors">
+                            About Us
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Search Button -->
+                    <button class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="Open search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Credit Balance -->
+                    <div class="flex items-center gap-2 px-3 py-2 glass rounded-lg">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-500">
+                            <circle cx="8" cy="8" r="6"></circle>
+                            <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
+                            <path d="M7 6h1v4"></path>
+                            <path d="m16.71 13.88.7.71-2.82 2.82"></path>
+                        </svg>
+                        <span class="text-sm font-medium">100 Credits</span>
+                    </div>
+
+                    <!-- Create Video Button - Orange -->
+                    <a href="/" class="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/20">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m13.73 4 3.54 3.54L7 17.8 2.92 15.42 13.73 4z"></path>
+                            <path d="m17.27 7.54 3.54 3.54-1.78 1.78-3.54-3.54 1.78-1.78z"></path>
+                            <path d="M4 19a2 2 0 0 0 2 2h16"></path>
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+
+                    <!-- User Avatar -->
+                    <div class="relative user-dropdown">
+                        <button class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="User menu" onclick="toggleUserMenu()">
+                            <div class="w-8 h-8 rounded-full ring-2 ring-amber-500/50 ring-offset-2 ring-offset-background flex items-center justify-center bg-primary text-white font-semibold text-sm overflow-hidden">
+                                <span>JD</span>
+                            </div>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div id="user-menu" class="hidden absolute right-0 mt-2 w-56 glass backdrop-blur-xl border border-white/10 rounded-lg shadow-xl overflow-hidden">
+                            <div class="px-4 py-3 border-b border-white/10">
+                                <p class="text-sm font-medium">My Account</p>
+                            </div>
+                            <div class="py-1">
+                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span>Profile</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <span>Settings</span>
+                                </a>
+                            </div>
+                            <div class="border-t border-white/10">
+                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                                    </svg>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="Open mobile menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="4" x2="20" y1="12" y2="12"></line>
+                            <line x1="4" x2="20" y1="6" y2="6"></line>
+                            <line x1="4" x2="20" y1="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+    // Toggle user menu dropdown
+    function toggleUserMenu() {
+        const menu = document.getElementById('user-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.querySelector('.user-dropdown');
+        const menu = document.getElementById('user-menu');
+        if (dropdown && !dropdown.contains(event.target)) {
+            menu.classList.add('hidden');
+        }
+    });
+    </script>

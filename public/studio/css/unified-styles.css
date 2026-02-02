@@ -1,0 +1,364 @@
+/**
+ * Unified Styles - Movie Utopia
+ * 统一主站和 Studio 的设计系统
+ */
+
+/* ===== 颜色系统 ===== */
+:root {
+  --primary: 139 92 246; /* violet-500 */
+  --primary-foreground: 255 255 255;
+  --accent: 245 158 11; /* amber-500 */
+  --background: 13 13 13; /* zinc-950 */
+  --foreground: 250 250 250;
+  --card: 24 24 27; /* zinc-900 */
+  --border: 39 39 42; /* zinc-800 */
+  --muted: 63 63 70; /* zinc-700 */
+}
+
+/* ===== 字体系统 ===== */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 按钮统一样式 ===== */
+.btn-primary {
+  background: linear-gradient(to right, rgb(139 92 246), rgb(168 85 247));
+  color: white;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.btn-accent {
+  background: linear-gradient(to right, rgb(245 158 11), rgb(251 191 36));
+  color: white;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: rgb(161 161 170); /* zinc-400 */
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+/* ===== 导航栏统一 ===== */
+nav.glass-panel {
+  background: rgba(13, 13, 13, 0.8);
+  backdrop-filter: blur(40px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ===== 用户头像统一 ===== */
+.user-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(39 39 42); /* zinc-800 */
+  transition: all 0.3s;
+}
+
+.user-avatar:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.user-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  line-height: 1;
+}
+
+/* ===== Tab 栏统一样式 ===== */
+.tabs-container {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0;
+  margin-bottom: 1.5rem;
+}
+
+.tab-item {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(161 161 170); /* zinc-400 */
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  position: relative;
+  bottom: -1px;
+}
+
+.tab-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-item.active {
+  color: rgb(139 92 246); /* primary */
+  border-bottom-color: rgb(139 92 246);
+}
+
+/* ===== 输入框统一 ===== */
+.input-unified {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  color: white;
+  font-size: 0.875rem;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.input-unified:focus {
+  outline: none;
+  border-color: rgb(139 92 246);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.input-unified::placeholder {
+  color: rgb(113 113 122); /* zinc-500 */
+}
+
+/* ===== Textarea 统一 ===== */
+textarea.input-unified {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ===== 卡片统一 ===== */
+.card-unified {
+  background: rgba(24, 24, 27, 0.8); /* zinc-900 */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s;
+}
+
+.card-unified:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== 徽章统一 ===== */
+.badge-unified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(139, 92, 246, 0.1);
+  color: rgb(139 92 246);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* ===== 覆盖 Studio 原有样式 ===== */
+
+/* 生成按钮 - 橙色主题 */
+#btn-generate,
+#btn-generate-result,
+button[onclick="generateVideo()"],
+button[onclick="generateVideoFromResult()"] {
+  background: linear-gradient(to right, rgb(234 88 12), rgb(249 115 22)) !important;
+  padding: 0.625rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3) !important;
+}
+
+#btn-generate:hover,
+#btn-generate-result:hover,
+button[onclick="generateVideo()"]:hover,
+button[onclick="generateVideoFromResult()"]:hover {
+  opacity: 0.9 !important;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.5) !important;
+}
+
+/* 返回按钮统一 */
+button[onclick*="goBack"],
+button[onclick*="Back"] {
+  background: transparent !important;
+  color: rgb(161 161 170) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+}
+
+button[onclick*="goBack"]:hover,
+button[onclick*="Back"]:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: white !important;
+}
+
+/* 标题统一 */
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: white;
+}
+
+/* 间距统一 */
+.container-unified {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 玻璃效果统一 */
+.glass-unified {
+  background: rgba(24, 24, 27, 0.5);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 动画统一 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Hover 效果统一 */
+.hover-lift {
+  transition: all 0.3s;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* 阴影系统统一 */
+.shadow-sm-unified {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-md-unified {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-lg-unified {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.shadow-xl-unified {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* 聚焦环统一 */
+*:focus-visible {
+  outline: 2px solid rgb(139 92 246);
+  outline-offset: 2px;
+}
+
+/* 滚动条统一 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(39, 39, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 170, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(161, 161, 170, 0.5);
+}
+
+/* ===== 背景控制 - 只保留点状背景 ===== */
+#hero-canvas,
+#prism-canvas,
+#waves-canvas,
+#bubbles-canvas,
+#dot-pattern-canvas {
+  display: none !important;
+}
+
+/* 保留点状背景 */
+#dots-canvas {
+  display: block !important;
+  opacity: 0.4;
+}
+
+/* 减弱聚光灯和噪点效果 */
+.spotlight-overlay {
+  opacity: 0.3;
+}
+
+.bg-noise {
+  opacity: 0.3;
+}

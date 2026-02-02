@@ -1,0 +1,53 @@
+/**
+ * Font Configuration - Movie Utopia
+ *
+ * Note: Local WOFF2 fonts are temporarily disabled due to corruption.
+ * Using Google Fonts CDN as primary source (already loaded in HTML).
+ *
+ * To re-enable local fonts, download correct WOFF2 files from:
+ * - Syne: https://fonts.google.com/specimen/Syne
+ * - DM Sans: https://fonts.google.com/specimen/DM+Sans
+ * - Geist: https://vercel.com/font
+ */
+
+/* Temporarily disabled - corrupted local fonts
+@font-face {
+    font-family: 'Syne';
+    src: url('syne.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('dm-sans.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+
+/* Keep Space Grotesk and Geist if they work */
+@font-face {
+    font-family: 'Space Grotesk';
+    src: url('space-grotesk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Better performance */
+}
+
+@font-face {
+    font-family: 'Geist';
+    src: url('geist.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Better performance */
+}
+
+/*
+ * Fallback font stack
+ * Primary fonts are loaded from Google Fonts CDN
+ */
+body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                 Roboto, 'Helvetica Neue', Arial, sans-serif;
+}

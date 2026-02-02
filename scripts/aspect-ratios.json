@@ -1,0 +1,194 @@
+{
+  "video-1": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-10": {
+    "width": 640,
+    "height": 271,
+    "aspectRatio": 2.3616,
+    "orientation": "横屏"
+  },
+  "video-11": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-12": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-13": {
+    "width": 640,
+    "height": 383,
+    "aspectRatio": 1.671,
+    "orientation": "横屏"
+  },
+  "video-14": {
+    "width": 640,
+    "height": 268,
+    "aspectRatio": 2.3881,
+    "orientation": "横屏"
+  },
+  "video-15": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-16": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-17": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-18": {
+    "width": 640,
+    "height": 345,
+    "aspectRatio": 1.8551,
+    "orientation": "横屏"
+  },
+  "video-19": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-2": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-20": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-21": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-22": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-23": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-24": {
+    "width": 640,
+    "height": 360,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-25": {
+    "width": 640,
+    "height": 272,
+    "aspectRatio": 2.3529,
+    "orientation": "横屏"
+  },
+  "video-26": {
+    "width": 640,
+    "height": 382,
+    "aspectRatio": 1.6754,
+    "orientation": "横屏"
+  },
+  "video-27": {
+    "width": 640,
+    "height": 346,
+    "aspectRatio": 1.8497,
+    "orientation": "横屏"
+  },
+  "video-28": {
+    "width": 640,
+    "height": 266,
+    "aspectRatio": 2.406,
+    "orientation": "横屏"
+  },
+  "video-29": {
+    "width": 640,
+    "height": 286,
+    "aspectRatio": 2.2378,
+    "orientation": "横屏"
+  },
+  "video-3": {
+    "width": 640,
+    "height": 345,
+    "aspectRatio": 1.8551,
+    "orientation": "横屏"
+  },
+  "video-30": {
+    "width": 640,
+    "height": 330,
+    "aspectRatio": 1.9394,
+    "orientation": "横屏"
+  },
+  "video-31": {
+    "width": 1920,
+    "height": 800,
+    "aspectRatio": 2.4,
+    "orientation": "横屏"
+  },
+  "video-32": {
+    "width": 3840,
+    "height": 2160,
+    "aspectRatio": 1.7778,
+    "orientation": "横屏"
+  },
+  "video-4": {
+    "width": 640,
+    "height": 345,
+    "aspectRatio": 1.8551,
+    "orientation": "横屏"
+  },
+  "video-5": {
+    "width": 640,
+    "height": 266,
+    "aspectRatio": 2.406,
+    "orientation": "横屏"
+  },
+  "video-6": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-7": {
+    "width": 640,
+    "height": 336,
+    "aspectRatio": 1.9048,
+    "orientation": "横屏"
+  },
+  "video-8": {
+    "width": 640,
+    "height": 358,
+    "aspectRatio": 1.7877,
+    "orientation": "横屏"
+  },
+  "video-9": {
+    "width": 640,
+    "height": 345,
+    "aspectRatio": 1.8551,
+    "orientation": "横屏"
+  }
+}

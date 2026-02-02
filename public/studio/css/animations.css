@@ -1,0 +1,330 @@
+/* 1. Entrance Animations */
+@keyframes blurFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+}
+
+.animate-on-scroll.is-visible {
+    animation: blurFadeUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* 2. Button Border Beam */
+.btn-beam {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    z-index: 1;
+    background-color: transparent !important;
+    /* Hide original background to show beam */
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Preserve transitions */
+}
+
+.btn-beam::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(from 0deg, transparent 0deg, var(--color-primary) 60deg, transparent 120deg);
+    transform: translate(-50%, -50%);
+    animation: beam-rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: -2;
+    /* Behind the mask */
+}
+
+.btn-beam::after {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    /* 1.5px border width for better visibility */
+    background: var(--color-bg-secondary);
+    border-radius: inherit;
+    z-index: -1;
+    /* Behind content, in front of beam */
+}
+
+/* Recreate gradient background */
+.btn-beam.bg-gradient-to-r::after {
+    background: linear-gradient(to right, #ea580c, #f97316);
+    /* orange-600 to orange-500 */
+}
+
+/* Better hover state - show beam */
+.btn-beam:hover::before {
+    opacity: 1;
+}
+
+@keyframes beam-rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* 3. Text Reveal */
+.char-slide-down {
+    display: inline-block;
+    opacity: 0;
+    animation: charSlideDown 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes charSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 4. Marquee */
+.marquee-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    margin-top: 40px;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: marquee-scroll 40s linear infinite;
+}
+
+.marquee-card {
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    backdrop-filter: blur(4px);
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* 5. Shimmer Button v3 (Modern shadcn style) - Homepage Only */
+@keyframes shimmer-slide {
+    0% {
+        transform: translateX(-100%) skewX(-15deg);
+    }
+
+    100% {
+        transform: translateX(200%) skewX(-15deg);
+    }
+}
+
+.btn-shimmer-sh {
+    position: relative;
+    overflow: hidden;
+    background-color: #ea580c;
+    color: white;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-shimmer-sh:hover {
+    background-color: #f97316;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(234, 88, 12, 0.5);
+}
+
+.btn-shimmer-sh:active {
+    transform: scale(0.98);
+}
+
+.shimmer-effect {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 45%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 55%,
+            transparent 100%);
+    animation: shimmer-slide 3s infinite;
+}
+
+.shimmer-effect-secondary {
+    animation-duration: 4s;
+    animation-delay: 0.5s;
+    opacity: 0.6;
+}
+
+/* 5.1 Shine Button (Official shadcn.io style) - Generate Button Only */
+.btn-shine {
+    position: relative;
+    overflow: hidden;
+    /* Removed hardcoded bg to allow use with gradients */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+
+.btn-shine .shine-layer {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%);
+    transform: translateX(-100%) skewX(-20deg);
+    transition: transform 0.6s ease-in-out;
+    z-index: 2;
+}
+
+.btn-shine:hover .shine-layer {
+    transform: translateX(100%) skewX(-20deg);
+}
+
+.btn-shine:hover {
+    background-color: #f97316;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(234, 88, 12, 0.5);
+}
+
+.btn-shine:active {
+    transform: scale(0.98);
+}
+
+
+/* 6. Prompt Cards Marquee (JS Controlled for smooth drag) */
+.prompt-marquee-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    margin-top: 10px;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    cursor: grab;
+    user-select: none;
+}
+
+.prompt-marquee-container:active {
+    cursor: grabbing;
+}
+
+.prompt-marquee-inner {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    will-change: transform;
+}
+
+.prompt-card {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.2s;
+    backdrop-filter: blur(4px);
+}
+
+.prompt-card:hover {
+    background: rgba(255, 107, 53, 0.1);
+    border-color: rgba(255, 107, 53, 0.3);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.prompt-card:active {
+    transform: scale(0.95);
+}
+
+.prompt-card.selected {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: rgba(255, 107, 53, 0.5);
+    color: white;
+    box-shadow: 0 0 15px rgba(234, 88, 12, 0.2);
+}
+
+
+
+@keyframes glow-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 20px 2px rgba(255, 107, 53, 0.2);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+    }
+}
+
+.glow-pulse {
+    animation: glow-pulse 0.5s ease-out;
+}
+
+/* 7. Advanced Glass Badge (Optimized for prominence) */
+.btn-tag-glass {
+    background: rgba(0, 0, 0, 0.4);
+    /* Darker for better contrast */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* Brighter border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 0 4px rgba(255, 255, 255, 0.05);
+    animation: badge-spring 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes badge-spring {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

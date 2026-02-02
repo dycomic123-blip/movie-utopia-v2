@@ -1,0 +1,548 @@
+<!-- VIEW 3: RESULT (聊天式三栏布局) -->
+<main id="view-result" class="view-section h-screen w-screen flex pt-14 relative overflow-hidden bg-[#050505]">
+
+    <!-- 左栏: 聊天历史 + 输入框 (33% 宽度) -->
+    <aside class="flex-[0_0_33.333%] flex flex-col border-r border-white/5 bg-[#080808/50] backdrop-blur-xl z-20">
+        <!-- 顶部标题栏 -->
+        <div class="px-5 py-4 border-b border-white/5 flex items-center justify-between">
+            <button onclick="goBackToInput()"
+                class="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group">
+                <svg width="16" height="16" viewBox="0 0 24 24" class="group-hover:-translate-x-1 transition-transform">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="1.5" d="M19 12H5m7-7l-7 7l7 7" />
+                </svg>
+                <span class="text-xs font-medium" data-i18n="back_to_create">返回创作</span>
+            </button>
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-semibold text-zinc-500 tracking-wider uppercase"
+                    data-i18n="history">对话历史</span>
+                <div class="flex gap-1">
+                    <!-- 清除历史按钮 -->
+                    <button onclick="clearChatHistory()"
+                        class="p-1.5 rounded-md hover:bg-red-500/10 text-zinc-500 hover:text-red-400 transition-colors group"
+                        title="清除历史">
+                        <svg width="14" height="14" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2m-6 5v6m4-6v6" />
+                        </svg>
+                    </button>
+                    <!-- 折叠/展开历史按钮 -->
+                    <button onclick="toggleChatHistory()"
+                        class="p-1.5 rounded-md hover:bg-white/5 text-zinc-500 hover:text-white transition-colors"
+                        title="折叠/展开">
+                        <svg width="14" height="14" viewBox="0 0 24 24" id="chat-toggle-icon">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5" d="m7 15l5-5l5 5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可滚动聊天历史区 -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
+            <!-- 对话示例 1 -->
+            <div class="flex flex-col gap-2">
+                <div class="self-end bg-white/5 border border-white/5 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[90%]">
+                    <p class="text-xs font-light text-zinc-300 leading-relaxed">"赛博朋克侦探站在雨中..."</p>
+                </div>
+                <div
+                    class="self-start bg-orange-500/10 border border-orange-500/20 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[90%]">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div
+                            class="w-4 h-4 rounded-full bg-orange-500 flex items-center justify-center text-[8px] font-bold text-black">
+                            AI</div>
+                        <span class="text-[10px] text-orange-400 font-medium">AI 助手</span>
+                    </div>
+                    <div class="aspect-video w-full rounded-lg overflow-hidden bg-black mb-2 border border-white/5">
+                        <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover opacity-60">
+                    </div>
+                    <p class="text-[10px] text-zinc-500">视频生成成功</p>
+                </div>
+            </div>
+
+            <!-- 对话示例 2 -->
+            <div class="flex flex-col gap-2">
+                <div class="self-end bg-white/5 border border-white/5 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[90%]">
+                    <p class="text-xs font-light text-zinc-300 leading-relaxed">"让它更有电影感,加蓝色灯光"</p>
+                </div>
+                <div
+                    class="self-start bg-orange-500/10 border border-orange-500/20 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[90%]">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-[10px] text-orange-400 font-medium">处理中...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部输入区 (沿用第二页样式) -->
+        <div class="p-4 border-t border-white/5 bg-[#050505]">
+            <div id="main-dialog-result"
+                class="relative bg-[#0a0a0a] border border-white/12 rounded-xl p-1 shadow-2xl backdrop-blur-sm">
+                <div class="bg-zinc-900/30 rounded-lg p-3">
+                    <textarea id="prompt-input-result"
+                        class="w-full bg-transparent text-white text-sm placeholder-zinc-700 resize-none outline-none min-h-[100px] font-light leading-relaxed custom-scrollbar"
+                        placeholder="描述你的下一个镜头..."></textarea>
+                </div>
+
+                <div class="flex items-center justify-between px-2 py-2">
+                    <div class="flex gap-2">
+                        <button onclick="document.getElementById('direct-file-input-result').click()"
+                            class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300"
+                            title="附加文件">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="m21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                            </svg>
+                            <input type="file" id="direct-file-input-result" class="hidden">
+                        </button>
+                        <button
+                            class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300"
+                            title="AI 助手">
+                            <svg width="18" height="18" viewBox="0 0 24 24" class="scale-x-[-1]">
+                                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path
+                                        d="M3.845 7.922a2.883 2.883 0 1 1 4.077-4.077l12.234 12.233a2.884 2.884 0 0 1-4.078 4.078z" />
+                                    <path stroke-linecap="round" d="m6 10l4-4" />
+                                    <path
+                                        d="M16.1 2.307a.483.483 0 0 1 .9 0l.43 1.095a.48.48 0 0 0 .272.274l1.091.432a.486.486 0 0 1 0 .903l-1.09.432a.5.5 0 0 0-.273.273L17 6.81a.483.483 0 0 1-.9 0l-.43-1.095a.5.5 0 0 0-.273-.273l-1.09-.432a.486.486 0 0 1 0-.903l1.09-.432a.5.5 0 0 0 .273-.274zm3.867 6.823a.483.483 0 0 1 .9 0l.156.399c.05.125.148.224.273.273l.398.158a.486.486 0 0 1 0 .902l-.398.158a.5.5 0 0 0-.273.273l-.156.4.483.483 0 0 1-.9 0l-.157-.4a.5.5 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.902l.398-.158a.5.5 0 0 0 .272-.273zM5.133 15.307a.483.483 0 0 1 .9 0l.157.4a.48.48 0 0 0 .272.273l.398.157a.486.486 0 0 1 0 .903l-.398.158a.48.48 0 0 0-.272.273l-.157.4a.483.483 0 0 1-.9 0l-.157-.4a.48.48 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.903l.398-.157a.48.48 0 0 0 .272-.274z" />
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button onclick="generateVideo()" id="btn-generate-result"
+                        class="btn-shine flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white pl-4 pr-3 py-1.5 rounded-lg text-xs font-semibold hover:from-orange-500 hover:to-orange-400 transition-all duration-300 shadow-lg shadow-orange-500/20">
+                        <span class="shine-layer"></span>
+                        <span class="btn-text relative z-10" data-i18n="generate">生成</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" class="relative z-10 animate-pulse">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M20.2 6L3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Zm-14-.7l3.1 3.9m3.1-5.8l3.1 4M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 中栏: 预览区域 (弹性宽度) -->
+    <div class="flex-1 h-full flex flex-col overflow-y-auto custom-scrollbar bg-zinc-900/10 relative">
+        <!-- 正在生成的视频区 -->
+        <div class="p-8 pb-12">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-medium text-white flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                    正在生成 #8292B...
+                </h2>
+                <div class="flex gap-3">
+                    <button
+                        class="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium text-zinc-300 hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+                        <svg width="14" height="14" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5l5-5m-5 5V3" />
+                        </svg>
+                        <span data-i18n="export">导出</span>
+                    </button>
+                    <button onclick="openProEditor()"
+                        class="px-3 py-1.5 rounded-lg bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-2">
+                        <svg width="14" height="14" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path
+                                    d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z" />
+                                <path d="M10 14a2 2 0 1 1 0 4a2 2 0 0 1 0-4Z" />
+                                <circle cx="12" cy="12" r="2" transform="matrix(0 -1 -1 0 24 24)" />
+                                <path stroke-linecap="round" d="M14 16h5m-9-8H5m0 8h1m13-8h-1" />
+                            </g>
+                        </svg>
+                        <span data-i18n="edit_in_pro">专业编辑</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 主播放器 -->
+            <!-- 主播放器 -->
+            <div
+                class="aspect-video w-full bg-black rounded-xl border border-white/10 relative overflow-hidden shadow-2xl mb-6">
+                <!-- 动态粒子背景 -->
+                <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900">
+                    <!-- 粒子容器 -->
+                    <div class="absolute inset-0" id="particle-container">
+                        <!-- 粒子将通过 CSS 动画生成 -->
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    <!-- 光晕效果 -->
+                    <div
+                        class="absolute inset-0 bg-gradient-radial from-orange-500/10 via-transparent to-transparent animate-pulse">
+                    </div>
+                </div>
+
+                <!-- 生成状态信息遮罩 -->
+                <div
+                    class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[2px] z-10">
+                    <!-- 主图标 -->
+                    <div class="relative mb-6">
+                        <div
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-2 border-orange-500/30 flex items-center justify-center animate-pulse">
+                            <svg width="40" height="40" viewBox="0 0 24 24" class="text-orange-400">
+                                <path fill="currentColor"
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m.5-13H11v6l5.25 3.15l.75-1.23l-4.5-2.67z" />
+                            </svg>
+                        </div>
+                        <!-- 旋转光环 -->
+                        <div
+                            class="absolute inset-0 rounded-full border-2 border-transparent border-t-orange-500 animate-spin">
+                        </div>
+                    </div>
+
+                    <!-- 文字信息 -->
+                    <div class="text-center space-y-3">
+                        <h3 class="text-lg font-medium text-white flex items-center gap-2 justify-center">
+                            <span class="inline-block w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>
+                            正在创作中
+                        </h3>
+                        <p class="text-sm text-zinc-400">AI 正在为您生成精彩内容...</p>
+                        <div class="flex items-center gap-2 justify-center text-xs text-zinc-500">
+                            <svg width="14" height="14" viewBox="0 0 24 24" class="text-orange-400">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M12 6v6l4 2" />
+                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                            <span>预计等待时间: <span class="text-orange-400 font-mono">2-3 分钟</span></span>
+                        </div>
+                        <!-- 进度条 -->
+                        <div class="w-64 h-1 bg-zinc-800 rounded-full overflow-hidden mt-4">
+                            <div class="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full animate-progress"
+                                style="width: 45%"></div>
+                        </div>
+                        <span class="text-xs text-zinc-600 font-mono">45%</span>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                /* 粒子动画 */
+                .particle {
+                    position: absolute;
+                    width: 3px;
+                    height: 3px;
+                    background: radial-gradient(circle, rgba(251, 146, 60, 0.8) 0%, transparent 70%);
+                    border-radius: 50%;
+                    animation: float 8s infinite ease-in-out;
+                    opacity: 0;
+                }
+
+                .particle:nth-child(1) {
+                    left: 10%;
+                    top: 20%;
+                    animation-delay: 0s;
+                    animation-duration: 7s;
+                }
+
+                .particle:nth-child(2) {
+                    left: 20%;
+                    top: 80%;
+                    animation-delay: 0.5s;
+                    animation-duration: 8s;
+                }
+
+                .particle:nth-child(3) {
+                    left: 30%;
+                    top: 40%;
+                    animation-delay: 1s;
+                    animation-duration: 6s;
+                }
+
+                .particle:nth-child(4) {
+                    left: 40%;
+                    top: 60%;
+                    animation-delay: 1.5s;
+                    animation-duration: 9s;
+                }
+
+                .particle:nth-child(5) {
+                    left: 50%;
+                    top: 30%;
+                    animation-delay: 2s;
+                    animation-duration: 7s;
+                }
+
+                .particle:nth-child(6) {
+                    left: 60%;
+                    top: 70%;
+                    animation-delay: 2.5s;
+                    animation-duration: 8s;
+                }
+
+                .particle:nth-child(7) {
+                    left: 70%;
+                    top: 50%;
+                    animation-delay: 3s;
+                    animation-duration: 6.5s;
+                }
+
+                .particle:nth-child(8) {
+                    left: 80%;
+                    top: 25%;
+                    animation-delay: 3.5s;
+                    animation-duration: 7.5s;
+                }
+
+                .particle:nth-child(9) {
+                    left: 90%;
+                    top: 75%;
+                    animation-delay: 4s;
+                    animation-duration: 8.5s;
+                }
+
+                .particle:nth-child(10) {
+                    left: 15%;
+                    top: 55%;
+                    animation-delay: 0.3s;
+                    animation-duration: 7.2s;
+                }
+
+                .particle:nth-child(11) {
+                    left: 25%;
+                    top: 15%;
+                    animation-delay: 0.8s;
+                    animation-duration: 6.8s;
+                }
+
+                .particle:nth-child(12) {
+                    left: 35%;
+                    top: 85%;
+                    animation-delay: 1.3s;
+                    animation-duration: 7.8s;
+                }
+
+                .particle:nth-child(13) {
+                    left: 45%;
+                    top: 35%;
+                    animation-delay: 1.8s;
+                    animation-duration: 8.2s;
+                }
+
+                .particle:nth-child(14) {
+                    left: 55%;
+                    top: 65%;
+                    animation-delay: 2.3s;
+                    animation-duration: 6.5s;
+                }
+
+                .particle:nth-child(15) {
+                    left: 65%;
+                    top: 45%;
+                    animation-delay: 2.8s;
+                    animation-duration: 7.5s;
+                }
+
+                .particle:nth-child(16) {
+                    left: 75%;
+                    top: 10%;
+                    animation-delay: 3.3s;
+                    animation-duration: 8.8s;
+                }
+
+                .particle:nth-child(17) {
+                    left: 85%;
+                    top: 90%;
+                    animation-delay: 3.8s;
+                    animation-duration: 6.2s;
+                }
+
+                .particle:nth-child(18) {
+                    left: 12%;
+                    top: 42%;
+                    animation-delay: 0.6s;
+                    animation-duration: 7.6s;
+                }
+
+                .particle:nth-child(19) {
+                    left: 68%;
+                    top: 28%;
+                    animation-delay: 2.1s;
+                    animation-duration: 8.4s;
+                }
+
+                .particle:nth-child(20) {
+                    left: 42%;
+                    top: 72%;
+                    animation-delay: 1.2s;
+                    animation-duration: 7.4s;
+                }
+
+                @keyframes float {
+
+                    0%,
+                    100% {
+                        transform: translateY(0) translateX(0) scale(1);
+                        opacity: 0;
+                    }
+
+                    10% {
+                        opacity: 1;
+                    }
+
+                    50% {
+                        transform: translateY(-30px) translateX(20px) scale(1.5);
+                        opacity: 0.8;
+                    }
+
+                    90% {
+                        opacity: 1;
+                    }
+                }
+
+                /* 进度条动画 */
+                @keyframes progress {
+                    0% {
+                        width: 0%;
+                    }
+
+                    100% {
+                        width: 100%;
+                    }
+                }
+
+                .animate-progress {
+                    animation: progress 180s linear forwards;
+                }
+            </style>
+
+            <!-- 详细参数面板 -->
+            <div class="grid grid-cols-4 gap-4 bg-black/40 rounded-lg p-4 border border-white/5">
+                <div>
+                    <div class="text-[10px] text-zinc-500 uppercase mb-1" data-i18n="prompt_label">提示词</div>
+                    <div class="text-sm font-light text-zinc-300 truncate">"让它更有电影感,加蓝色灯光..."</div>
+                </div>
+                <div>
+                    <div class="text-[10px] text-zinc-500 uppercase mb-1" data-i18n="model_label">模型</div>
+                    <div class="text-sm font-mono text-zinc-400">CinemaReal v4</div>
+                </div>
+                <div>
+                    <div class="text-[10px] text-zinc-500 uppercase mb-1" data-i18n="dimensions">分辨率</div>
+                    <div class="text-sm font-mono text-zinc-400">1920x1080</div>
+                </div>
+                <div>
+                    <div class="text-[10px] text-zinc-500 uppercase mb-1" data-i18n="seed_label">种子</div>
+                    <div class="text-sm font-mono text-zinc-400">8829103</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 历史生成记录流 -->
+        <div class="px-8 pb-12 border-t border-white/5 pt-8">
+            <h3 class="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-6" data-i18n="history">历史记录</h3>
+
+            <!-- 历史项 1 -->
+            <div class="mb-12">
+                <div
+                    class="aspect-video w-full bg-black rounded-lg border border-white/5 relative overflow-hidden group cursor-pointer hover:border-white/10 transition-all">
+                    <div
+                        class="absolute inset-0 bg-zinc-900 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-width="1.5"
+                                    d="M20.409 9.353a2.998 2.998 0 0 1 0 5.294L7.597 21.614C5.534 22.737 3 21.277 3 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <span
+                            class="px-2 py-1 rounded bg-black/60 backdrop-blur text-[10px] text-zinc-300 border border-white/5">#8291A</span>
+                        <span
+                            class="px-2 py-1 rounded bg-green-500/20 backdrop-blur text-[10px] text-green-300 border border-green-500/20">成功</span>
+                    </div>
+                </div>
+                <div class="mt-3 flex justify-between items-start">
+                    <p class="text-sm text-zinc-400 max-w-2xl line-clamp-1 italic">"赛博朋克侦探站在雨中..."</p>
+                    <span class="text-xs text-zinc-600 font-mono">10:42 AM</span>
+                </div>
+            </div>
+
+            <!-- 历史项 2 -->
+            <div class="mb-12">
+                <div
+                    class="aspect-video w-full bg-black rounded-lg border border-white/5 relative overflow-hidden group cursor-pointer hover:border-white/10 transition-all">
+                    <div
+                        class="absolute inset-0 bg-zinc-900 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity grayscale">
+                    </div>
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <span
+                            class="px-2 py-1 rounded bg-black/60 backdrop-blur text-[10px] text-zinc-300 border border-white/5">#8290C</span>
+                        <span
+                            class="px-2 py-1 rounded bg-red-500/20 backdrop-blur text-[10px] text-red-300 border border-red-500/20"
+                            data-i18n="failed">失败</span>
+                    </div>
+                </div>
+                <div class="mt-3 flex justify-between items-start">
+                    <p class="text-sm text-zinc-400 max-w-2xl line-clamp-1 italic">"抽象色彩在太空中流动..."</p>
+                    <span class="text-xs text-zinc-600 font-mono">09:15 AM</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右栏: 缩略图导航 (固定 112px 宽度) -->
+    <aside
+        class="w-28 flex flex-col border-l border-white/5 bg-[#080808] z-20 overflow-y-auto custom-scrollbar p-3 space-y-3">
+        <div class="text-[10px] text-zinc-600 font-bold uppercase text-center py-2">媒体库</div>
+
+        <!-- 缩略图 1 (当前激活) -->
+        <div
+            class="aspect-video w-full rounded border border-orange-500 ring-2 ring-orange-500/20 cursor-pointer relative overflow-hidden">
+            <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover">
+        </div>
+
+        <!-- 缩略图 2 -->
+        <div
+            class="aspect-video w-full rounded border border-white/5 hover:border-zinc-500 cursor-pointer relative overflow-hidden opacity-60 hover:opacity-100 transition-all">
+            <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover">
+        </div>
+
+        <!-- 缩略图 3 -->
+        <div
+            class="aspect-video w-full rounded border border-white/5 hover:border-zinc-500 cursor-pointer relative overflow-hidden opacity-60 hover:opacity-100 transition-all">
+            <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover grayscale">
+        </div>
+
+        <!-- 缩略图 4 -->
+        <div
+            class="aspect-video w-full rounded border border-white/5 hover:border-zinc-500 cursor-pointer relative overflow-hidden opacity-60 hover:opacity-100 transition-all">
+            <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover">
+        </div>
+
+        <!-- 缩略图 5 -->
+        <div
+            class="aspect-video w-full rounded border border-white/5 hover:border-zinc-500 cursor-pointer relative overflow-hidden opacity-60 hover:opacity-100 transition-all">
+            <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover">
+        </div>
+    </aside>
+
+</main>
