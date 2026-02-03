@@ -3,20 +3,24 @@
 import { useState, useEffect } from 'react'
 
 export function AccessKeyModal() {
-    const [isVisible, setIsVisible] = useState(false)
+    // Default to visible (true) - show login first, then hide if already authenticated
+    const [isVisible, setIsVisible] = useState(true)
+    const [isChecking, setIsChecking] = useState(true)
     const [inputValue, setInputValue] = useState('')
     const [isShake, setIsShake] = useState(false)
     const [isUnlocked, setIsUnlocked] = useState(false)
     const [isWarping, setIsWarping] = useState(false)
     const [dots, setDots] = useState([false, false, false, false, false, false])
 
-    // Use localStorage for persistent access across all pages and sessions
+    // Check localStorage on mount - if already authenticated, hide modal
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const hasAccess = localStorage.getItem('utopia_access_v2')
-            if (!hasAccess) {
-                setIsVisible(true)
+            if (hasAccess) {
+                // Already authenticated, hide modal immediately
+                setIsVisible(false)
             }
+            setIsChecking(false)
         }
     }, [])
 
@@ -60,10 +64,11 @@ export function AccessKeyModal() {
         }
     }
 
-    if (!isVisible) return null
+    // Hide modal only when: not checking AND not visible (already authenticated)
+    if (!isChecking && !isVisible) return null
 
     return (
-        <div id="login-modal" className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all duration-500 ${!isVisible ? 'hidden' : ''}`}>
+        <div id="login-modal" className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all duration-500`}>
             {/* Backdrop - consistent 70% opacity as requested */}
             <div className="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
 
