@@ -87,6 +87,30 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* Ensure black background during initial load */
+    background-color: #141414 !important;
+  }
+
+  /* Initial auth overlay - prevents content flash before JS loads */
+  /* This creates a black overlay that covers everything until React hydrates */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+  }
+
+  /* Hide the overlay once the page is fully loaded and React takes over */
+  body.auth-ready::after {
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* Noise Texture Overlay */

@@ -5,6 +5,8 @@ import { SiteHeader } from '@/components/layout/SiteHeader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { CommandMenu } from '@/components/layout/CommandMenu'
 import { Toaster } from 'sonner'
+import { AuthProvider } from '@/components/features/auth/AuthProvider'
+import { AuthGate } from '@/components/features/auth/AuthGate'
 import { AccessKeyModal } from '@/components/features/auth/AccessKeyModal'
 
 const inter = Inter({
@@ -36,15 +38,22 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfairDisplay.variable} antialiased`}
       >
-        <SiteHeader />
-        <main className="min-h-screen pt-16">
-          {children}
-        </main>
-        <SiteFooter />
-        <CommandMenu />
-        <Toaster theme="dark" position="top-center" />
-        <AccessKeyModal />
-        {modal}
+        <AuthProvider>
+          {/* Login Modal - Always rendered first, shown when not authenticated */}
+          <AccessKeyModal />
+
+          {/* Main content - Only rendered when authenticated */}
+          <AuthGate>
+            <SiteHeader />
+            <main className="min-h-screen pt-16">
+              {children}
+            </main>
+            <SiteFooter />
+            <CommandMenu />
+            <Toaster theme="dark" position="top-center" />
+            {modal}
+          </AuthGate>
+        </AuthProvider>
       </body>
     </html>
   );

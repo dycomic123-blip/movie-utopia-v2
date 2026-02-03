@@ -1,28 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useAuth } from './AuthProvider'
 
 export function AccessKeyModal() {
-    // Default to visible (true) - show login first, then hide if already authenticated
-    const [isVisible, setIsVisible] = useState(true)
-    const [isChecking, setIsChecking] = useState(true)
+    const { isAuthenticated, isLoading, login } = useAuth()
     const [inputValue, setInputValue] = useState('')
     const [isShake, setIsShake] = useState(false)
     const [isUnlocked, setIsUnlocked] = useState(false)
     const [isWarping, setIsWarping] = useState(false)
+    const [isHiding, setIsHiding] = useState(false)
     const [dots, setDots] = useState([false, false, false, false, false, false])
-
-    // Check localStorage on mount - if already authenticated, hide modal
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const hasAccess = localStorage.getItem('utopia_access_v2')
-            if (hasAccess) {
-                // Already authenticated, hide modal immediately
-                setIsVisible(false)
-            }
-            setIsChecking(false)
-        }
-    }, [])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value
@@ -43,15 +31,15 @@ export function AccessKeyModal() {
     const handleSubmit = (val = inputValue) => {
         if (val === 'szy888') {
             // Success Logic: Mechanical Unlock & Warp Transition
-            localStorage.setItem('utopia_access_v2', 'true')
             setIsUnlocked(true)
 
             // Delay for lock animation then warp
             setTimeout(() => {
                 setIsWarping(true)
-                // Delay for Warp out + hide
+                // Delay for Warp out + hide, then trigger login
                 setTimeout(() => {
-                    setIsVisible(false)
+                    setIsHiding(true)
+                    login() // This updates the global auth state
                 }, 1200)
             }, 600)
         } else {
@@ -64,8 +52,8 @@ export function AccessKeyModal() {
         }
     }
 
-    // Hide modal only when: not checking AND not visible (already authenticated)
-    if (!isChecking && !isVisible) return null
+    // Don't show modal if authenticated or hiding after successful login
+    if ((!isLoading && isAuthenticated) || isHiding) return null
 
     return (
         <div id="login-modal" className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all duration-500`}>
