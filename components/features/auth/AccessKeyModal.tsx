@@ -10,10 +10,10 @@ export function AccessKeyModal() {
     const [isWarping, setIsWarping] = useState(false)
     const [dots, setDots] = useState([false, false, false, false, false, false])
 
-    // Use session storage for transient access
+    // Use localStorage for persistent access across all pages and sessions
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const hasAccess = sessionStorage.getItem('utopia_access_v2')
+            const hasAccess = localStorage.getItem('utopia_access_v2')
             if (!hasAccess) {
                 setIsVisible(true)
             }
@@ -39,7 +39,7 @@ export function AccessKeyModal() {
     const handleSubmit = (val = inputValue) => {
         if (val === 'szy888') {
             // Success Logic: Mechanical Unlock & Warp Transition
-            sessionStorage.setItem('utopia_access_v2', 'true')
+            localStorage.setItem('utopia_access_v2', 'true')
             setIsUnlocked(true)
 
             // Delay for lock animation then warp
