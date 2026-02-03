@@ -103,12 +103,20 @@ export function LeaderboardCardTabs({ creators }: LeaderboardCardTabsProps) {
               className={cn(
                 "flex items-center justify-center w-9 h-9 rounded-lg transition-all",
                 activeTab === 'tips'
-                  ? "bg-yellow-500/20 text-yellow-500 shadow-sm"
-                  : "bg-background/50 text-muted-foreground hover:bg-background/80"
+                  ? "bg-yellow-500/20 shadow-sm"
+                  : "bg-background/50 hover:bg-background/80"
               )}
               title="Top Earners"
             >
-              <DollarSign className="h-4 w-4" />
+              {/* Dollar sign with circular yellow background - matching video card style */}
+              <div className={cn(
+                "flex items-center justify-center w-5 h-5 rounded-full transition-all",
+                activeTab === 'tips'
+                  ? "bg-amber-500 text-white"
+                  : "bg-amber-500/60 text-white/80"
+              )}>
+                <span className="text-[10px] font-bold">$</span>
+              </div>
             </button>
 
             <button
