@@ -9,7 +9,6 @@ export function AccessKeyModal() {
     const [isShake, setIsShake] = useState(false)
     const [isUnlocked, setIsUnlocked] = useState(false)
     const [isWarping, setIsWarping] = useState(false)
-    const [isHiding, setIsHiding] = useState(false)
     const [dots, setDots] = useState([false, false, false, false, false, false])
 
     // Reset modal state when user logs out (isAuthenticated becomes false)
@@ -20,7 +19,6 @@ export function AccessKeyModal() {
             setIsShake(false)
             setIsUnlocked(false)
             setIsWarping(false)
-            setIsHiding(false)
             setDots([false, false, false, false, false, false])
         }
     }, [isAuthenticated, isLoading])
@@ -51,8 +49,7 @@ export function AccessKeyModal() {
                 setIsWarping(true)
                 // Delay for Warp out + hide, then trigger login
                 setTimeout(() => {
-                    setIsHiding(true)
-                    login() // This updates the global auth state
+                    login() // This updates the global auth state, which will hide the modal
                 }, 1200)
             }, 600)
         } else {
@@ -65,8 +62,9 @@ export function AccessKeyModal() {
         }
     }
 
-    // Don't show modal if authenticated or hiding after successful login
-    if ((!isLoading && isAuthenticated) || isHiding) return null
+    // Simple logic: show modal only when not loading AND not authenticated
+    if (isLoading) return null  // Still checking auth status
+    if (isAuthenticated) return null  // User is logged in
 
     return (
         <div id="login-modal" className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all duration-500`}>

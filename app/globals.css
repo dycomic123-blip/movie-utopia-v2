@@ -93,6 +93,7 @@
 
   /* Initial auth overlay - prevents content flash before JS loads */
   /* This creates a black overlay that covers everything until React hydrates */
+  /* z-index: 40 ensures login modal (z-100) appears above this overlay */
   body::after {
     content: '';
     position: fixed;
@@ -101,13 +102,13 @@
     width: 100%;
     height: 100%;
     background-color: #000000;
-    z-index: 50;
+    z-index: 40;
     pointer-events: none;
     opacity: 1;
     transition: opacity 0.3s ease-out;
   }
 
-  /* Hide the overlay once the page is fully loaded and React takes over */
+  /* Hide the overlay once authenticated */
   body.auth-ready::after {
     opacity: 0;
     pointer-events: none;
