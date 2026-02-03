@@ -12,6 +12,19 @@ export function AccessKeyModal() {
     const [isHiding, setIsHiding] = useState(false)
     const [dots, setDots] = useState([false, false, false, false, false, false])
 
+    // Reset modal state when user logs out (isAuthenticated becomes false)
+    useEffect(() => {
+        if (!isAuthenticated && !isLoading) {
+            // User logged out, reset all internal states to show the modal fresh
+            setInputValue('')
+            setIsShake(false)
+            setIsUnlocked(false)
+            setIsWarping(false)
+            setIsHiding(false)
+            setDots([false, false, false, false, false, false])
+        }
+    }, [isAuthenticated, isLoading])
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value
         if (val.length > 6) return
