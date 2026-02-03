@@ -11,8 +11,15 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import { useAuth } from '@/components/features/auth/AuthProvider'
 
 export function UserNav() {
+  const { logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -50,7 +57,10 @@ export function UserNav() {
 
         <DropdownMenuSeparator className="bg-white/10" />
 
-        <DropdownMenuItem className="cursor-pointer hover:bg-white/10 text-destructive">
+        <DropdownMenuItem
+          className="cursor-pointer hover:bg-white/10 text-destructive"
+          onClick={handleLogout}
+        >
           <LogOut className="w-4 h-4 mr-2" aria-hidden="true" />
           <span>Logout</span>
         </DropdownMenuItem>

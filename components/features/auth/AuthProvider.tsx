@@ -6,12 +6,14 @@ interface AuthContextType {
     isAuthenticated: boolean
     isLoading: boolean
     login: () => void
+    logout: () => void
 }
 
 const AuthContext = createContext<AuthContextType>({
     isAuthenticated: false,
     isLoading: true,
     login: () => { },
+    logout: () => { },
 })
 
 export function useAuth() {
@@ -48,8 +50,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setIsAuthenticated(true)
     }
 
+    const logout = () => {
+        // Clear authentication from localStorage
+        localStorage.removeItem('utopia_access_v2')
+        // Remove the auth-ready class to show the overlay
+        document.body.classList.remove('auth-ready')
+        // Set authenticated to false - this will show the login modal
+        setIsAuthenticated(false)
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, isLoading, login }}>
+        <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
