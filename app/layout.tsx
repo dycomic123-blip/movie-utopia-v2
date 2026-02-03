@@ -5,6 +5,7 @@ import { SiteHeader } from '@/components/layout/SiteHeader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { CommandMenu } from '@/components/layout/CommandMenu'
 import { Toaster } from 'sonner'
+import { AccessKeyModal } from '@/components/features/auth/AccessKeyModal'
 
 const inter = Inter({
   variable: "--font-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
         <SiteFooter />
         <CommandMenu />
         <Toaster theme="dark" position="top-center" />
+        <AccessKeyModal />
         {modal}
       </body>
     </html>

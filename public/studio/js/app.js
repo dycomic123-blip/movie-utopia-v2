@@ -267,8 +267,8 @@ function clearChatHistory() {
     const historyPanel = document.getElementById('chat-history-panel');
     if (historyPanel) {
         // Confirm before clearing
-        if (confirm('确定要清除所有历史对话吗？')) {
-            historyPanel.innerHTML = '<div class="text-center text-zinc-500 text-sm py-12">暂无历史记录</div>';
+        if (confirm('Are you sure you want to clear all chat history?')) {
+            historyPanel.innerHTML = '<div class="text-center text-zinc-500 text-sm py-12">No history yet</div>';
         }
     }
 }
@@ -305,7 +305,7 @@ function addPromptToChatHistory(prompt) {
     aiBubble.innerHTML = `
         <div class="flex items-center gap-2 mb-2">
             <div class="w-4 h-4 rounded-full bg-orange-500 flex items-center justify-center text-[8px] font-bold text-black">AI</div>
-            <span class="text-[10px] text-orange-400 font-medium">${translations[currentLang]?.ai_assistant || 'AI 助手'}</span>
+            <span class="text-[10px] text-orange-400 font-medium">${translations[currentLang]?.ai_assistant || 'AI Assistant'}</span>
         </div>
         <div class="ai-response-content flex flex-col gap-2">
             <div class="typing-target text-[10px] text-zinc-300"></div>
@@ -319,13 +319,13 @@ function addPromptToChatHistory(prompt) {
     const responseContent = aiBubble.querySelector('.ai-response-content');
 
     // Type out the initial response
-    typeMessage(typingTarget, '正在为你构思场景...', 30, () => {
+    typeMessage(typingTarget, 'Conceiving scene for you...', 30, () => {
         // Once typed, show the loading state
         setTimeout(() => {
             const loadingHtml = `
                 <div class="flex items-center gap-2 mt-2 pt-2 border-t border-white/5">
                     <div class="w-3 h-3 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin"></div>
-                    <span class="text-[10px] text-zinc-500">正在生成视频...</span>
+                    <span class="text-[10px] text-zinc-500">Generating video...</span>
                 </div>
             `;
             const div = document.createElement('div');
@@ -380,7 +380,7 @@ function generateVideoFromResult() {
     const prompt = promptInput.value.trim();
 
     if (!prompt) {
-        alert('请输入提示词');
+        alert('Please enter a prompt');
         return;
     }
 
@@ -492,15 +492,15 @@ function createNewVideoCard(prompt) {
                     <div class="absolute bottom-12 left-12 flex flex-col gap-3 z-20">
                         <!-- 进度状态 -->
                         <div class="flex items-center gap-2 text-white" style="font-size: 12px; font-weight: 500;">
-                            <span style="color: #888;">排队中</span>
+                            <span style="color: #888;">Queued</span>
                             <span style="color: #FF8800;" class="animate-pulse">>>>>>></span>
-                            <span style="color: #FF8800; font-weight: 600;">创作</span>
-                            <span style="color: #666;" class="animate-pulse">>>>>>></span>
+                            <span style="color: #FF8800; font-weight: 600;">Creating</span>
+                            <span style="color: #FF8800;" class="animate-pulse">>>>>>></span>
                         </div>
 
                         <!-- 提示文案 -->
                         <div style="font-size: 10px; color: #999; font-weight: 400;">
-                            创作中,预计等待 1 分钟
+                            Creating, est. wait 1 min
                         </div>
 
                         <!-- 通知提示 -->
@@ -509,7 +509,7 @@ function createNewVideoCard(prompt) {
                                 <path d="M10 2C6.68629 2 4 4.68629 4 8V11.5858L2.29289 13.2929C1.90237 13.6834 2.17811 14.5 2.70711 14.5H17.2929C17.8219 14.5 18.0976 13.6834 17.7071 13.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z" fill="#FF8800" opacity="0.5"/>
                                 <path d="M8 16C8 17.1046 8.89543 18 10 18C11.1046 18 12 17.1046 12 16" stroke="#FF8800" stroke-width="2" stroke-linecap="round"/>
                             </svg>
-                            <span>打开通知,我们将在任务完成后通过浏览器通知您。</span>
+                            <span>Enable notifications, we will notify you when done.</span>
                         </div>
                     </div>
 
@@ -695,7 +695,7 @@ function handleLoginSubmit() {
     const key = keyInput.value.trim();
 
     // Specific validation requested by user: szy188
-    if (key !== 'szy188') {
+    if (key !== 'szy888') {
         const container = keyInput.closest('.group');
         const loginBtn = document.getElementById('btn-login-submit');
         const dots = document.querySelectorAll('#key-dots-container [data-dot]');
@@ -722,6 +722,7 @@ function handleLoginSubmit() {
     }
 
     // Success Logic: Mechanical Unlock & Warp Transition
+    sessionStorage.setItem('utopia_access_v2', 'true');
     if (masterBtn) masterBtn.classList.add('lock-unlocked');
 
     setTimeout(() => {
@@ -1173,7 +1174,7 @@ function addToHistorySidebar(videoId, prompt, seed) {
 function fillRemixPrompt() {
     const urlParams = new URLSearchParams(window.location.search);
     const remixPrompt = urlParams.get('remix');
-    
+
     if (remixPrompt) {
         const promptInput = document.getElementById('prompt-input');
         if (promptInput) {
@@ -1188,4 +1189,11 @@ if (document.readyState === 'loading') {
 } else {
     fillRemixPrompt();
 }
-window.addEventListener('load', fillRemixPrompt);
+window.addEventListener('load', () => {
+    fillRemixPrompt();
+
+    // Check for access key - REMOVED (Global only)
+    // if (!sessionStorage.getItem('utopia_access_v2')) {
+    //    showLoginModal();
+    // }
+});

@@ -1,6 +1,6 @@
 import { Creator } from '@/lib/types/video'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Trophy, TrendingUp, Coins, Heart, Repeat2 } from 'lucide-react'
+import { Trophy, TrendingUp, Coins, Heart, Repeat2, DollarSign } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 type LeaderboardType = 'remixes' | 'tips' | 'likes'
@@ -50,7 +50,7 @@ export function LeaderboardCard({
     },
     tips: {
       title: title || "💰 打赏榜",
-      icon: Coins,
+      icon: DollarSign,
       color: "yellow",
       getValue: (c: Creator) => c.totalTips,
       formatValue: (v: number) => `$${v.toLocaleString()}`,

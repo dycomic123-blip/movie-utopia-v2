@@ -149,23 +149,33 @@
   }
 
   /* Typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif;
   }
 }
 
 @layer utilities {
+
   /* Cinema mode utility */
   .cinema-mode {
     background-color: #141414;
   }
 
-  /* Glassmorphism utility */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Refractive Edge & Glass Refinement */
+  .glass-premium {
+    backdrop-filter: blur(40px) saturate(180%);
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(10, 10, 10, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.8),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden !important;
   }
 
   /* Text gradient utility */
@@ -182,6 +192,7 @@
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -192,6 +203,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -211,6 +223,34 @@
 .animate-fade-in-delay-2 {
   opacity: 0;
   animation: fade-in 1s ease-out 0.6s forwards;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-5px);
+  }
+
+  40% {
+    transform: translateX(5px);
+  }
+
+  60% {
+    transform: translateX(-5px);
+  }
+
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
 }
 
 /* Hero Title - Fluid Typography with Gradient and Clip Mask Effect */
@@ -263,25 +303,135 @@
 /* Masonry Grid Styles - 高级感布局 */
 .masonry-grid {
   display: flex;
-  margin-left: -24px; /* 更大的间距 */
+  margin-left: -24px;
+  /* 更大的间距 */
   width: auto;
 }
 
 .masonry-column {
-  padding-left: 24px; /* 更大的间距 */
+  padding-left: 24px;
+  /* 更大的间距 */
   background-clip: padding-box;
 }
 
-.masonry-column > div {
-  margin-bottom: 32px; /* 更舒适的纵向间距 */
+.masonry-column>div {
+  margin-bottom: 32px;
+  /* 更舒适的纵向间距 */
 }
 
 /* 高级卡片效果 */
-.masonry-column > div article {
+.masonry-column>div article {
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
 }
 
-.masonry-column > div article:hover {
+.masonry-column>div article:hover {
   border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Premium Login Styles (Ported from Studio) --- */
+
+/* Shine Button */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.btn-shine .shine-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
+  transform: translateX(-100%) skewX(-20deg);
+  transition: transform 0.6s ease-in-out;
+  z-index: 2;
+}
+
+.btn-shine:hover .shine-layer {
+  transform: translateX(100%) skewX(-20deg);
+}
+
+.btn-shine:hover {
+  background-color: #f97316;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(234, 88, 12, 0.5);
+}
+
+.btn-shine:active {
+  transform: scale(0.98);
+}
+
+/* Energy Line */
+.energy-line {
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  display: none;
+}
+
+.energy-active .energy-line {
+  display: block;
+  animation: energy-pulse 0.8s ease-in-out forwards;
+}
+
+@keyframes energy-pulse {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Warp Animation */
+.app-warp {
+  animation: warp-in 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes warp-in {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0) brightness(1);
+  }
+
+  50% {
+    filter: blur(10px) brightness(2);
+    transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+    filter: blur(40px) brightness(5);
+  }
+}
+
+/* Lock Animation */
+/* Lock Animation */
+.lock-shackle {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 7px 11px;
+  /* Specific pivot point for 24x24 SVG */
+}
+
+.lock-unlocked .lock-shackle {
+  transform: translateY(-3px) rotate(-15deg);
 }

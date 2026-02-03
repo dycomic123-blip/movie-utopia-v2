@@ -412,8 +412,11 @@
                 <!-- Right: Actions (靠右) -->
                 <div class="flex items-center gap-2">
                     <!-- Search Button -->
-                    <button class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="Open search">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button
+                        class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+                        aria-label="Open search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
@@ -421,7 +424,8 @@
 
                     <!-- Credit Balance -->
                     <div class="flex items-center gap-2 px-3 py-2 glass rounded-lg">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-500">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" class="text-amber-500">
                             <circle cx="8" cy="8" r="6"></circle>
                             <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
                             <path d="M7 6h1v4"></path>
@@ -431,8 +435,10 @@
                     </div>
 
                     <!-- Create Video Button - Orange -->
-                    <a href="/" class="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/20">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="/"
+                        class="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/20">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <path d="m13.73 4 3.54 3.54L7 17.8 2.92 15.42 13.73 4z"></path>
                             <path d="m17.27 7.54 3.54 3.54-1.78 1.78-3.54-3.54 1.78-1.78z"></path>
                             <path d="M4 19a2 2 0 0 0 2 2h16"></path>
@@ -442,36 +448,48 @@
 
                     <!-- User Avatar -->
                     <div class="relative user-dropdown">
-                        <button class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="User menu" onclick="toggleUserMenu()">
-                            <div class="w-8 h-8 rounded-full ring-2 ring-amber-500/50 ring-offset-2 ring-offset-background flex items-center justify-center bg-primary text-white font-semibold text-sm overflow-hidden">
+                        <button
+                            class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+                            aria-label="User menu" onclick="toggleUserMenu()">
+                            <div
+                                class="w-8 h-8 rounded-full ring-2 ring-amber-500/50 ring-offset-2 ring-offset-background flex items-center justify-center bg-primary text-white font-semibold text-sm overflow-hidden">
                                 <span>JD</span>
                             </div>
                         </button>
 
                         <!-- Dropdown Menu -->
-                        <div id="user-menu" class="hidden absolute right-0 mt-2 w-56 glass backdrop-blur-xl border border-white/10 rounded-lg shadow-xl overflow-hidden">
+                        <div id="user-menu"
+                            class="hidden absolute right-0 mt-2 w-56 glass backdrop-blur-xl border border-white/10 rounded-lg shadow-xl overflow-hidden">
                             <div class="px-4 py-3 border-b border-white/10">
                                 <p class="text-sm font-medium">My Account</p>
                             </div>
                             <div class="py-1">
-                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <a href="#"
+                                    class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
                                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                     <span>Profile</span>
                                 </a>
-                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                <a href="#"
+                                    class="flex items-center gap-3 px-4 py-2 text-sm hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                        </path>
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                     <span>Settings</span>
                                 </a>
                             </div>
                             <div class="border-t border-white/10">
-                                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-white/10 transition-colors">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <a href="#"
+                                    class="flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-white/10 transition-colors">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                         <polyline points="16 17 21 12 16 7"></polyline>
                                         <line x1="21" x2="9" y1="12" y2="12"></line>
@@ -483,8 +501,11 @@
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <button class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors" aria-label="Open mobile menu">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button
+                        class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+                        aria-label="Open mobile menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <line x1="4" x2="20" y1="12" y2="12"></line>
                             <line x1="4" x2="20" y1="6" y2="6"></line>
                             <line x1="4" x2="20" y1="18" y2="18"></line>
@@ -496,34 +517,36 @@
     </header>
 
     <script>
-    // Toggle user menu dropdown
-    function toggleUserMenu() {
-        const menu = document.getElementById('user-menu');
-        menu.classList.toggle('hidden');
-    }
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const dropdown = document.querySelector('.user-dropdown');
-        const menu = document.getElementById('user-menu');
-        if (dropdown && !dropdown.contains(event.target)) {
-            menu.classList.add('hidden');
+        // Toggle user menu dropdown
+        function toggleUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.classList.toggle('hidden');
         }
-    });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.querySelector('.user-dropdown');
+            const menu = document.getElementById('user-menu');
+            if (dropdown && !dropdown.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
     </script>
 
     <!-- VIEW 2: INPUT -->
-    <main id="view-input" class="view-section active min-h-screen flex-col items-center justify-center relative pt-14 px-4">
+    <main id="view-input"
+        class="view-section active min-h-screen flex-col items-center justify-center relative pt-14 px-4">
         <!-- Back Button -->
 
-        <div class="w-full max-w-3xl z-10">
-            <div class="text-center mb-10">
-                <h2 class="shiny-text text-5xl font-medium tracking-wider font-geist mb-4">
-                    工业级电影AI制片从这里开始</h2>
-                <p class="text-2xl font-light text-zinc-500 mt-2 tracking-widest uppercase"
-                    style="background-color: transparent !important;">Industrial AI Filmmaking Starts Here</p>
+        <div class="w-full max-w-full z-10">
+            <div class="text-center mb-4">
+                <h2 class="shiny-text text-4xl font-medium tracking-wider font-geist mb-4 mt-32 whitespace-nowrap uppercase inline-block"
+                    style="transform: scale(0.8, 1.1);">
+                    Industrial AI Film Production Starts Here</h2>
             </div>
+        </div>
 
+        <div class="w-full max-w-3xl z-10">
             <div class="relative group delay-100">
 
                 <div id="main-dialog-container"
@@ -649,17 +672,17 @@
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="1.5" d="M19 12H5m7-7l-7 7l7 7" />
                     </svg>
-                    <span class="text-xs font-medium" data-i18n="back_to_create">返回创作</span>
+                    <span class="text-xs font-medium" data-i18n="back_to_create">Back to Create</span>
                 </button>
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleHistoryPanel()" title="显示/隐藏历史"
+                    <button onclick="toggleHistoryPanel()" title="Toggle History"
                         class="p-1.5 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all">
                         <svg width="16" height="16" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="1.5" d="M3 7h18M3 12h18M3 17h18" />
                         </svg>
                     </button>
-                    <button onclick="clearChatHistory()" title="清除历史"
+                    <button onclick="clearChatHistory()" title="Clear History"
                         class="p-1.5 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-red-400 transition-all">
                         <svg width="16" height="16" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -668,14 +691,14 @@
                         </svg>
                     </button>
                     <span class="text-xs font-semibold text-zinc-500 tracking-wider uppercase"
-                        data-i18n="history">历史记录</span>
+                        data-i18n="history">History</span>
                 </div>
             </div>
 
             <!-- 可滚动聊天历史区 -->
             <div id="chat-history-panel"
                 class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6 transition-all duration-300">
-                <div class="text-center text-zinc-500 text-xs py-12">暂无历史记录</div>
+                <div class="text-center text-zinc-500 text-xs py-12">No history yet</div>
             </div>
 
             <!-- 底部输入区 (侧边栏布局优化) -->
@@ -687,14 +710,14 @@
                     <div class="bg-zinc-900/30 rounded-lg p-3">
                         <textarea id="prompt-input-result"
                             class="w-full bg-transparent text-white text-sm placeholder-zinc-700 resize-none outline-none min-h-[100px] font-light leading-relaxed custom-scrollbar"
-                            placeholder="描述你的下一个镜头..."></textarea>
+                            placeholder="Describe your next shot..."></textarea>
                     </div>
 
                     <div class="flex items-center justify-between px-2 py-2">
                         <div class="flex gap-2">
                             <button onclick="document.getElementById('direct-file-input-result').click()"
                                 class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300"
-                                title="附加文件">
+                                title="Attach File">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                     <path
@@ -704,7 +727,7 @@
                             </button>
                             <button
                                 class="p-2 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-all duration-300"
-                                title="AI 助手">
+                                title="AI Assistant">
                                 <svg width="18" height="18" viewBox="0 0 24 24" class="scale-x-[-1]">
                                     <g fill="none" stroke="currentColor" stroke-width="1.5">
                                         <path
@@ -759,23 +782,28 @@
                         <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">Grotesque
                         </div>
                         <!-- Duplicate for loop -->
-                        <div class="prompt-card" onclick="fillPrompt('Inspirational')" data-i18n="tag_Inspirational">励志
+                        <div class="prompt-card" onclick="fillPrompt('Inspirational')" data-i18n="tag_Inspirational">
+                            Inspirational</div>
+                        <div class="prompt-card" onclick="fillPrompt('Passionate')" data-i18n="tag_Passionate">
+                            Passionate</div>
+                        <div class="prompt-card" onclick="fillPrompt('Tragic')" data-i18n="tag_Tragic">Tragic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Healing')" data-i18n="tag_Healing">Healing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Soft')" data-i18n="tag_Soft">Soft</div>
+                        <div class="prompt-card" onclick="fillPrompt('Mind-bending')" data-i18n="tag_Mind-bending">
+                            Mind-bending</div>
+                        <div class="prompt-card" onclick="fillPrompt('Twisty')" data-i18n="tag_Twisty">Twisty</div>
+                        <div class="prompt-card" onclick="fillPrompt('Epic')" data-i18n="tag_Epic">Epic</div>
+                        <div class="prompt-card" onclick="fillPrompt('Absurd')" data-i18n="tag_Absurd">Absurd</div>
+                        <div class="prompt-card" onclick="fillPrompt('Dark')" data-i18n="tag_Dark">Dark</div>
+                        <div class="prompt-card" onclick="fillPrompt('Depressing')" data-i18n="tag_Depressing">
+                            Depressing</div>
+                        <div class="prompt-card" onclick="fillPrompt('Humor')" data-i18n="tag_Humor">Humor</div>
+                        <div class="prompt-card" onclick="fillPrompt('Detached')" data-i18n="tag_Detached">Detached
                         </div>
-                        <div class="prompt-card" onclick="fillPrompt('Passionate')" data-i18n="tag_Passionate">热血</div>
-                        <div class="prompt-card" onclick="fillPrompt('Tragic')" data-i18n="tag_Tragic">悲剧</div>
-                        <div class="prompt-card" onclick="fillPrompt('Healing')" data-i18n="tag_Healing">治愈</div>
-                        <div class="prompt-card" onclick="fillPrompt('Soft')" data-i18n="tag_Soft">柔和</div>
-                        <div class="prompt-card" onclick="fillPrompt('Mind-bending')" data-i18n="tag_Mind-bending">烧脑
+                        <div class="prompt-card" onclick="fillPrompt('Romantic')" data-i18n="tag_Romantic">Romantic
                         </div>
-                        <div class="prompt-card" onclick="fillPrompt('Twisty')" data-i18n="tag_Twisty">反转</div>
-                        <div class="prompt-card" onclick="fillPrompt('Epic')" data-i18n="tag_Epic">宏大</div>
-                        <div class="prompt-card" onclick="fillPrompt('Absurd')" data-i18n="tag_Absurd">荒诞</div>
-                        <div class="prompt-card" onclick="fillPrompt('Dark')" data-i18n="tag_Dark">黑暗</div>
-                        <div class="prompt-card" onclick="fillPrompt('Depressing')" data-i18n="tag_Depressing">压抑</div>
-                        <div class="prompt-card" onclick="fillPrompt('Humor')" data-i18n="tag_Humor">幽默</div>
-                        <div class="prompt-card" onclick="fillPrompt('Detached')" data-i18n="tag_Detached">疏离</div>
-                        <div class="prompt-card" onclick="fillPrompt('Romantic')" data-i18n="tag_Romantic">浪漫</div>
-                        <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">怪诞</div>
+                        <div class="prompt-card" onclick="fillPrompt('Grotesque')" data-i18n="tag_Grotesque">Grotesque
+                        </div>
                     </div>
                 </div>
             </div>
@@ -859,12 +887,15 @@
                                                 <div class="sprocket-hole" style="width: 15px; height: 5px;"></div>
                                             </div>
                                             <!-- 中央画面区域 -->
-                                            <div class="film-aperture" style="width: 240px; height: 135px; border-width: 3px;">
+                                            <div class="film-aperture"
+                                                style="width: 240px; height: 135px; border-width: 3px;">
                                                 <div class="grid-overlay"></div>
                                                 <div class="scan-line"></div>
                                                 <div class="light-sweep"></div>
-                                                <div class="status-label top-left" style="font-size: 10px;">RENDERING</div>
-                                                <div class="status-label bottom-right" style="font-size: 10px;">16:9</div>
+                                                <div class="status-label top-left" style="font-size: 10px;">RENDERING
+                                                </div>
+                                                <div class="status-label bottom-right" style="font-size: 10px;">16:9
+                                                </div>
                                             </div>
                                             <!-- 底部齿孔带 -->
                                             <div class="sprocket-bottom" style="height: 9px;">
@@ -888,30 +919,36 @@
                                 <!-- 底部信息区域 - 左下角 -->
                                 <div class="absolute bottom-12 left-12 flex flex-col gap-3 z-20">
                                     <!-- 进度状态 -->
-                                    <div class="flex items-center gap-2 text-white" style="font-size: 12px; font-weight: 500;">
-                                        <span style="color: #888;">排队中</span>
+                                    <div class="flex items-center gap-2 text-white"
+                                        style="font-size: 12px; font-weight: 500;">
+                                        <span style="color: #888;">Queued</span>
                                         <span style="color: #FF8800;" class="animate-pulse">>>>>>></span>
-                                        <span style="color: #FF8800; font-weight: 600;">创作</span>
-                                        <span style="color: #666;" class="animate-pulse">>>>>>></span>
+                                        <span style="color: #FF8800; font-weight: 600;">Creating</span>
+                                        <span style="color: #FF8800;" class="animate-pulse">>>>>>></span>
                                     </div>
 
                                     <!-- 提示文案 -->
                                     <div style="font-size: 10px; color: #999; font-weight: 400;">
-                                        创作中，预计等待 1 分钟
+                                        Creating, est. wait 1 min
                                     </div>
 
                                     <!-- 通知提示 -->
                                     <div class="flex items-center gap-1 mt-1" style="font-size: 8px; color: #666;">
-                                        <svg width="11" height="11" viewBox="0 0 20 20" fill="none" class="flex-shrink-0">
-                                            <path d="M10 2C6.68629 2 4 4.68629 4 8V11.5858L2.29289 13.2929C1.90237 13.6834 2.17811 14.5 2.70711 14.5H17.2929C17.8219 14.5 18.0976 13.6834 17.7071 13.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z" fill="#FF8800" opacity="0.5"/>
-                                            <path d="M8 16C8 17.1046 8.89543 18 10 18C11.1046 18 12 17.1046 12 16" stroke="#FF8800" stroke-width="2" stroke-linecap="round"/>
+                                        <svg width="11" height="11" viewBox="0 0 20 20" fill="none"
+                                            class="flex-shrink-0">
+                                            <path
+                                                d="M10 2C6.68629 2 4 4.68629 4 8V11.5858L2.29289 13.2929C1.90237 13.6834 2.17811 14.5 2.70711 14.5H17.2929C17.8219 14.5 18.0976 13.6834 17.7071 13.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z"
+                                                fill="#FF8800" opacity="0.5" />
+                                            <path d="M8 16C8 17.1046 8.89543 18 10 18C11.1046 18 12 17.1046 12 16"
+                                                stroke="#FF8800" stroke-width="2" stroke-linecap="round" />
                                         </svg>
-                                        <span>打开通知，我们将在任务完成后通过浏览器通知您。</span>
+                                        <span>Enable notifications, we will notify you when done.</span>
                                     </div>
                                 </div>
 
                                 <!-- 右上角状态信息 -->
-                                <div class="absolute top-8 right-12 text-right" style="font-family: monospace; font-size: 12px; color: #666;">
+                                <div class="absolute top-8 right-12 text-right"
+                                    style="font-family: monospace; font-size: 12px; color: #666;">
                                     <div>QUEUE STATUS: ACTIVE</div>
                                     <div class="mt-2" style="color: #FF8800;">
                                         RENDERING...
@@ -951,7 +988,7 @@
                                         data-i18n="prompt_label">Prompt</span>
                                     <p id="current-prompt-display"
                                         class="text-[11px] text-zinc-300 font-light truncate max-w-[350px] italic">
-                                        "让它更有电影感,加蓝色灯光..."</p>
+                                        "Make it more cinematic, add blue lighting..."</p>
                                 </div>
                                 <div class="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
                             </div>
@@ -965,7 +1002,7 @@
         <aside class="w-60 flex flex-col border-l border-white/5 bg-[#111] z-20 overflow-hidden">
             <!-- 标题栏 -->
             <div class="px-4 py-4 border-b border-white/5">
-                <h3 class="text-xs font-semibold text-zinc-400 tracking-wider uppercase">历史记录</h3>
+                <h3 class="text-xs font-semibold text-zinc-400 tracking-wider uppercase">History</h3>
             </div>
 
             <!-- 历史列表 (可滚动) -->
@@ -1609,7 +1646,7 @@
     <!-- Video Track 2 -->
     <div class="relative">
         <div class="flex items-center gap-1 mb-1">
-            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">视频轨道 2</div>
+            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">Video Track 2</div>
         </div>
         <div class="flex relative h-14 items-center gap-1">
             <div class="timeline-clip relative w-48 h-14 bg-zinc-800 rounded-lg border border-white/10 overflow-hidden cursor-pointer hover:brightness-110 transition-all"
@@ -1645,7 +1682,7 @@
     <!-- Audio Track -->
     <div class="relative">
         <div class="flex items-center gap-1 mb-1">
-            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">音频轨道</div>
+            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">Audio Track</div>
         </div>
         <div class="flex relative h-8 items-center">
             <div class="w-[600px] h-full bg-teal-900/30 border border-teal-500/20 rounded-lg relative overflow-hidden">
@@ -1680,21 +1717,21 @@
     <!-- Effects Track -->
     <div class="relative">
         <div class="flex items-center gap-1 mb-1">
-            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">特效轨道</div>
+            <div class="text-[9px] text-zinc-500 font-medium uppercase tracking-wider w-20">FX Track</div>
         </div>
         <div class="flex relative h-8 items-center">
             <div class="timeline-clip relative w-32 h-8 bg-zinc-800/60 border border-yellow-500/30 rounded-lg overflow-hidden cursor-pointer hover:brightness-110 transition-all"
                 oncontextmenu="showClipMenu(event, this)">
                 <div class="absolute inset-0 flex items-center justify-center gap-1">
                     <iconify-icon icon="solar:blur-linear" class="text-yellow-400" width="14"></iconify-icon>
-                    <div class="text-[9px] font-medium text-yellow-200">模糊</div>
+                    <div class="text-[9px] font-medium text-yellow-200">Blur</div>
                 </div>
             </div>
             <div class="timeline-clip relative w-36 h-8 bg-zinc-800/60 border border-orange-500/30 rounded-lg overflow-hidden cursor-pointer hover:brightness-110 transition-all"
                 oncontextmenu="showClipMenu(event, this)">
                 <div class="absolute inset-0 flex items-center justify-center gap-1">
                     <iconify-icon icon="solar:sun-2-linear" class="text-orange-400" width="14"></iconify-icon>
-                    <div class="text-[9px] font-medium text-orange-200">光晕</div>
+                    <div class="text-[9px] font-medium text-orange-200">Glow</div>
                 </div>
             </div>
             <div class="timeline-clip relative w-40 h-8 bg-zinc-800/60 border border-pink-500/30 rounded-lg overflow-hidden cursor-pointer hover:brightness-110 transition-all"
@@ -1702,7 +1739,7 @@
                 <div class="absolute inset-0 flex items-center justify-center gap-1">
                     <iconify-icon icon="solar:stars-minimalistic-linear" class="text-pink-400"
                         width="14"></iconify-icon>
-                    <div class="text-[9px] font-medium text-pink-200">粒子</div>
+                    <div class="text-[9px] font-medium text-pink-200">Particle</div>
                 </div>
             </div>
         </div>
@@ -1714,7 +1751,7 @@
     <div id="clip-window"
         class="hidden absolute z-50 bg-[#161616]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-64 animate-enter ring-1 ring-white/5">
         <div class="p-3 border-b border-white/5 flex items-center justify-between">
-            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">镜头选项</span>
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Shot Options</span>
             <svg width="18" height="18" viewBox="0 0 24 24" class="text-zinc-500 hover:text-white cursor-pointer"
                 onclick="closeClipWindow()">
                 <g fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1731,7 +1768,7 @@
                     <iconify-icon icon="solar:cube-minimalistic-linear" width="16"></iconify-icon>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-white">空间视频</div>
+                    <div class="text-xs font-medium text-white">Spatial Video</div>
                     <div class="text-[9px] text-zinc-500">Create 3D depth map</div>
                 </div>
             </div>
@@ -1755,15 +1792,15 @@
                 </div>
             </div>
 
-            <!-- 绮句慨闀滃ご -->
+            <!-- 绮句慨闀滃頭 -->
             <div
                 class="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
                 <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
                     <iconify-icon icon="solar:sparkling-linear" width="16"></iconify-icon>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-white">精修镜头</div>
-                    <div class="text-[9px] text-zinc-500">放大或重新绘制</div>
+                    <div class="text-xs font-medium text-white">Refine Shot</div>
+                    <div class="text-[9px] text-zinc-500">Upscale or redraw</div>
                 </div>
             </div>
 
@@ -1778,8 +1815,8 @@
                     </svg>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-white">导出</div>
-                    <div class="text-[9px] text-zinc-500">导出当前镜头</div>
+                    <div class="text-xs font-medium text-white">Export</div>
+                    <div class="text-[9px] text-zinc-500">Export current shot</div>
                 </div>
             </div>
 
@@ -1796,8 +1833,8 @@
                     </svg>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-white">复制</div>
-                    <div class="text-[9px] text-zinc-500">复制镜头到剪贴板</div>
+                    <div class="text-xs font-medium text-white">Copy</div>
+                    <div class="text-[9px] text-zinc-500">Copy to clipboard</div>
                 </div>
             </div>
 
@@ -1814,7 +1851,10 @@
                             d="M6.5 6h.11a2 2 0 0 0 1.83-1.32l.034-.103l.097-.291c.083-.249.125-.373.18-.479a1.5 1.5 0 0 1 1.094-.788C9.962 3 10.093 3 10.355 3h3.29c.262 0 .393 0 .51.019a1.5 1.5 0 0 1 1.094.788c.055.106.097.23.18.479l.097.291A2 2 0 0 0 17.5 6" />
                     </g>
                 </svg>
-                <span class="text-xs text-zinc-400 group-hover:text-red-400">删除镜头</span>
+                <div>
+                    <div class="text-xs font-medium text-white group-hover:text-red-400 decoration-red-400">Delete</div>
+                    <div class="text-[9px] text-zinc-500 group-hover:text-red-400/70">Delete current</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1843,7 +1883,7 @@
     <input type="file" id="direct-file-input" class="hidden" multiple>
     <!-- Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="hideLoginModal()"></div>
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-xl" onclick="hideLoginModal()"></div>
         <div class="glass-premium w-full max-w-md pt-16 pb-12 px-12 rounded-[2.5rem] relative transform transition-all duration-500 scale-90 opacity-0"
             id="login-modal-content">
             <!-- Close Button -->
