@@ -25,6 +25,7 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
   const [showTipModal, setShowTipModal] = useState(false)
   const [showMoreMenu, setShowMoreMenu] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
+  const [hasUnlockedPrompt, setHasUnlockedPrompt] = useState(false)
 
   const handleCopyPrompt = () => {
     navigator.clipboard.writeText(video.title)
@@ -54,6 +55,7 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
 
   const handleTip = (amount: number) => {
     setTipsAmount(prev => prev + amount)
+    setHasUnlockedPrompt(true) // 打赏后解锁提示词
     setShowTipModal(false)
   }
 
@@ -115,30 +117,46 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
         <div className="p-4 border-b border-border space-y-3">
           <h2 className="font-bold text-lg">{video.title}</h2>
 
-          {/* Prompt with Copy */}
+          {/* Prompt with Copy - Locked/Unlocked */}
           <div className="relative">
             <div className="p-3 rounded-lg bg-muted/50 text-sm text-muted-foreground min-h-[100px] flex items-start">
               <div className="flex-1">
                 <div className="text-xs font-semibold mb-1 text-foreground">Prompt:</div>
-                <div className="leading-relaxed">{video.title}</div>
+                {hasUnlockedPrompt ? (
+                  <div className="leading-relaxed">{video.title}</div>
+                ) : (
+                  <div className="relative">
+                    <div className="leading-relaxed blur-sm select-none pointer-events-none">
+                      {video.title}
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-transparent via-black/60 to-transparent">
+                      <div className="flex flex-col items-center gap-2 bg-card/90 backdrop-blur-sm px-4 py-3 rounded-lg border border-amber-500/30">
+                        <DollarSign className="h-6 w-6 text-amber-500" />
+                        <p className="text-xs font-semibold text-center">Tip to unlock prompt</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-            <button
-              onClick={handleCopyPrompt}
-              className="absolute top-2 right-2 flex items-center gap-1.5 px-2 py-1 rounded-md bg-background/80 backdrop-blur-sm hover:bg-background text-xs font-medium transition-colors"
-            >
-              {isCopied ? (
-                <>
-                  <Check className="h-3.5 w-3.5 text-green-500" />
-                  Copied
-                </>
-              ) : (
-                <>
-                  <Copy className="h-3.5 w-3.5" />
-                  Copy
-                </>
-              )}
-            </button>
+            {hasUnlockedPrompt && (
+              <button
+                onClick={handleCopyPrompt}
+                className="absolute top-2 right-2 flex items-center gap-1.5 px-2 py-1 rounded-md bg-background/80 backdrop-blur-sm hover:bg-background text-xs font-medium transition-colors"
+              >
+                {isCopied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5 text-green-500" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    Copy
+                  </>
+                )}
+              </button>
+            )}
           </div>
 
           {/* Stats */}
