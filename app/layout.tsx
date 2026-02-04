@@ -24,6 +24,18 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   title: "MOVIE UTOPIA - AI Video Platform",
   description: "Premium AI-powered video platform with cutting-edge features",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
+  themeColor: '#141414',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Movie Utopia',
+  },
 };
 
 export default function RootLayout({
