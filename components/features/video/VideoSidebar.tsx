@@ -344,33 +344,14 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
               </div>
             )}
           </div>
-          {hasUnlockedPrompt ? (
-            <a
-              href={`/studio/index.html?remix=${encodeURIComponent(video.title)}&sourceId=${video.id}`}
-              target="_blank"
-              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              <Repeat2 className="h-4 w-4" />
-              Remix
-            </a>
-          ) : (
-            <div className="relative">
-              <button
-                disabled
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-muted text-muted-foreground cursor-not-allowed relative overflow-hidden"
-              >
-                <Repeat2 className="h-4 w-4" />
-                Remix
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-transparent" />
-              </button>
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="bg-card/95 backdrop-blur-sm px-2 py-1 rounded-md border border-amber-500/30 flex items-center gap-1">
-                  <DollarSign className="h-3 w-3 text-amber-500" />
-                  <span className="text-[10px] font-semibold">Tip to unlock</span>
-                </div>
-              </div>
-            </div>
-          )}
+          <a
+            href={`/studio/index.html?remix=${encodeURIComponent(video.title)}&sourceId=${video.id}`}
+            target="_blank"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <Repeat2 className="h-4 w-4" />
+            Remix
+          </a>
         </div>
 
         {/* More Menu */}
