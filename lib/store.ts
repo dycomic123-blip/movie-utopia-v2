@@ -23,7 +23,7 @@ interface AppStore {
 }
 
 export const useAppStore = create<AppStore>((set) => ({
-  credits: 50, // Mock initial value
+  credits: 1888, // Mock initial value
   setCredits: (credits) => set({ credits }),
   deductCredits: (amount) => set((state) => ({
     credits: Math.max(0, state.credits - amount)
