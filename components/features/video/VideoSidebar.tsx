@@ -26,6 +26,7 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
   const [showMoreMenu, setShowMoreMenu] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
   const [hasUnlockedPrompt, setHasUnlockedPrompt] = useState(false)
+  const [isRemixShaking, setIsRemixShaking] = useState(false)
 
   const handleCopyPrompt = () => {
     navigator.clipboard.writeText(video.title)
@@ -51,6 +52,17 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
       setTimeout(() => setIsLikeAnimating(false), 600)
     }
     setIsLiked(!isLiked)
+  }
+
+  const handleRemixClick = () => {
+    if (hasUnlockedPrompt) {
+      // 已解锁：跳转到 Studio
+      window.open(`/studio/index.html?remix=${encodeURIComponent(video.title)}&sourceId=${video.id}`, '_blank')
+    } else {
+      // 未解锁：抖动提示
+      setIsRemixShaking(true)
+      setTimeout(() => setIsRemixShaking(false), 600)
+    }
   }
 
   const handleTip = (amount: number) => {
@@ -344,14 +356,14 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
               </div>
             )}
           </div>
-          <a
-            href={`/studio/index.html?remix=${encodeURIComponent(video.title)}&sourceId=${video.id}`}
-            target="_blank"
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          <button
+            onClick={handleRemixClick}
+            className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors ${isRemixShaking ? 'animate-shake' : ''
+              }`}
           >
             <Repeat2 className="h-4 w-4" />
             Remix
-          </a>
+          </button>
         </div>
 
         {/* More Menu */}

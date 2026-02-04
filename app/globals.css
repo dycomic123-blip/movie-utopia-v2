@@ -250,6 +250,7 @@
   animation: fade-in 1s ease-out 0.6s forwards;
 }
 
+/* Shake animation for locked buttons */
 @keyframes shake {
 
   0%,
@@ -257,26 +258,26 @@
     transform: translateX(0);
   }
 
-  20% {
-    transform: translateX(-5px);
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
   }
 
-  40% {
-    transform: translateX(5px);
-  }
-
-  60% {
-    transform: translateX(-5px);
-  }
-
+  20%,
+  40%,
+  60%,
   80% {
-    transform: translateX(5px);
+    transform: translateX(4px);
   }
 }
 
 .animate-shake {
-  animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
+
 
 /* Hero Title - Fluid Typography with Gradient and Clip Mask Effect */
 .hero-title {
