@@ -358,8 +358,10 @@ export function VideoSidebar({ video, creators, relatedVideos }: VideoSidebarPro
           </div>
           <button
             onClick={handleRemixClick}
-            className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors ${isRemixShaking ? 'animate-shake' : ''
-              }`}
+            className={cn(
+              "flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors",
+              isRemixShaking && "animate-shake"
+            )}
           >
             <Repeat2 className="h-4 w-4" />
             Remix
