@@ -1,6 +1,6 @@
 'use client'
 
-import { DollarSign } from 'lucide-react'
+import { Coins } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Popover,
@@ -27,23 +27,23 @@ export function TipButton({ video }: TipButtonProps) {
     }
 
     deductCredits(amount)
-    toast.success(`Tipped $${amount} to ${video.author.name}!`)
+    toast.success(`Tipped ${amount} credits to ${video.author.name}!`)
   }
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="gap-2">
-          <DollarSign className="h-4 w-4" />
+          <Coins className="h-4 w-4" />
           Tip
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-64 border-neutral-800 bg-[#141414]">
+      <PopoverContent className="w-64 border border-white/10 bg-[#141414] text-white shadow-2xl z-[100] opacity-100">
         <div className="space-y-3">
           <div>
             <h4 className="mb-1 text-sm font-medium">Tip {video.author.name}</h4>
             <p className="text-xs text-neutral-400">
-              Your balance: ${credits}
+              Your balance: {credits} Credits
             </p>
           </div>
 
@@ -56,7 +56,7 @@ export function TipButton({ video }: TipButtonProps) {
                 onClick={() => handleTip(amount)}
                 className="h-16 flex-col gap-1"
               >
-                <DollarSign className="h-4 w-4" />
+                <Coins className="h-4 w-4" />
                 <span className="text-lg font-bold">{amount}</span>
               </Button>
             ))}

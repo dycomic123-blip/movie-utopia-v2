@@ -39,8 +39,20 @@ export function AccessKeyModal() {
         }
     }
 
-    const handleSubmit = (val = inputValue) => {
-        if (val === 'szy888') {
+    const handleSubmit = async (val = inputValue) => {
+        try {
+            const response = await fetch('/api/auth/access-key', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accessKey: val })
+            })
+
+            if (!response.ok) {
+                throw new Error('Invalid access key')
+            }
+
+            const user = await response.json()
+
             // Success Logic: Mechanical Unlock & Warp Transition
             setIsUnlocked(true)
 
@@ -49,10 +61,10 @@ export function AccessKeyModal() {
                 setIsWarping(true)
                 // Delay for Warp out + hide, then trigger login
                 setTimeout(() => {
-                    login() // This updates the global auth state, which will hide the modal
+                    login(String(user.id)) // This updates the global auth state, which will hide the modal
                 }, 1200)
             }, 600)
-        } else {
+        } catch (error) {
             // Error
             setIsShake(true)
             setInputValue('')

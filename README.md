@@ -107,6 +107,102 @@ Open [http://localhost:3000](http://localhost:3000) to view the demo.
 npm run build
 ```
 
+## 🗄️ Neon Postgres 持久化
+
+本项目提供了一个简单的 KV 存储 API，部署在 Vercel 时可直接连接 Neon。
+
+### 1) 创建 Neon 数据库
+1. 在 Neon 控制台创建项目与数据库。
+2. 获取连接串（`postgresql://...`）。
+
+### 2) 本地环境变量
+在项目根目录创建 `.env.local`：
+```
+DATABASE_URL="postgresql://<user>:<password>@<host>/<db>?sslmode=require"
+```
+
+### 3) Vercel 环境变量
+在 Vercel 项目设置中添加 `DATABASE_URL`，值同上。
+
+### 4) 使用示例
+持久化 API 路由：`/api/kv`
+
+- 写入：
+```bash
+curl -X POST http://localhost:3000/api/kv \
+  -H "Content-Type: application/json" \
+  -d '{"key":"likes:video-1","value":{"liked":true}}'
+```
+
+- 读取：
+```bash
+curl "http://localhost:3000/api/kv?key=likes:video-1"
+```
+
+- 删除：
+```bash
+curl -X DELETE "http://localhost:3000/api/kv?key=likes:video-1"
+```
+
+## 🧱 Prisma ORM（自动建表 + 迁移）
+
+如果你需要类似 Python ORM 的体验（模型 + 自动建表 + 迁移），已接入 Prisma。
+
+### 1) 初始化依赖
+```bash
+npm install
+```
+
+### 2) 生成/更新数据库表
+确保 `DATABASE_URL` 已配置，然后执行：
+```bash
+npx prisma migrate dev --name init
+```
+
+### 3) 生成 Prisma Client
+```bash
+npx prisma generate
+```
+
+### 4) 示例模型
+模型定义在 `prisma/schema.prisma`，已包含 `User`/`Video`/`Follow`/`VideoLike`/`VideoTip`：
+```
+model User {
+  id             String   @id @default(uuid())
+  avatar         String?
+  name           String
+  bio            String?
+  walletBalance  Decimal  @default(0) @db.Decimal(18, 2)
+  followersCount Int      @default(0)
+  followingCount Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+```
+
+### 5) 初始化视频/作者数据
+把当前项目中的视频列表与作者写入数据库：
+```bash
+npm run db:seed
+```
+
+## 🔐 Neon Auth（身份认证）
+
+建议把 Neon Auth 作为“认证层”，业务资料仍放在 `User` 表，通过 `authUserId` 关联。
+
+- Prisma 已新增 `User.authUserId`（可为空、唯一）
+- 登录后用 `authUserId` 查找/创建业务用户资料
+
+### neonctl（可选）
+如果你需要用 CLI 管理 Neon，可以安装或用 npx：
+```bash
+npm i -g neonctl@latest
+```
+或：
+```bash
+npx neonctl --help
+```
+
 ### Add shadcn/ui Components
 ```bash
 npx shadcn@latest add <component-name>

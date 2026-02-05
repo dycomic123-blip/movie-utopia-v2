@@ -1,4 +1,4 @@
-import { VideoItem } from '@/lib/types/video'
+import { VideoItem } from '../types/video'
 
 const genres = ['Action', 'Drama', 'Comedy', 'Sci-Fi', 'Horror', 'Romance', 'Thriller'] as const
 

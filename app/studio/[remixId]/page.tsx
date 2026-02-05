@@ -1,6 +1,9 @@
 import { StudioContainer } from '@/components/features/studio/StudioContainer'
-import { mockVideos } from '@/lib/data/mockVideos'
 import { notFound } from 'next/navigation'
+import { prisma } from '@/lib/prisma'
+import { mapVideoToItem, videoInclude } from '@/lib/db/videoMapper'
+
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
   params: Promise<{
@@ -8,19 +11,27 @@ interface PageProps {
   }>
 }
 
-export function generateStaticParams() {
-  return mockVideos.map((video) => ({
-    remixId: video.id,
-  }))
-}
-
 export default async function StudioRemixPage({ params }: PageProps) {
   const { remixId } = await params
-  const sourceVideo = mockVideos.find((v) => v.id === remixId)
+  const remixVideoId = Number(remixId)
 
-  if (!sourceVideo) {
+  if (!Number.isInteger(remixVideoId) || remixVideoId <= 0) {
     notFound()
   }
 
-  return <StudioContainer remixSourceId={remixId} sourceVideo={sourceVideo} />
+  const sourceRecord = await prisma.video.findUnique({
+    where: { id: remixVideoId },
+    include: videoInclude
+  })
+
+  if (!sourceRecord) {
+    notFound()
+  }
+
+  return (
+    <StudioContainer
+      remixSourceId={remixId}
+      sourceVideo={mapVideoToItem(sourceRecord)}
+    />
+  )
 }

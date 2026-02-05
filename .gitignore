@@ -23,6 +23,14 @@
 # misc
 .DS_Store
 *.pem
+*.log
+.eslintcache
+.cache
+.turbo
+.swc
+.idea/
+.claudecode/
+addComments.ts
 
 # debug
 npm-debug.log*

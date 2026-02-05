@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  authUserId     String?  @unique
+  accessKey      String?  @unique
+  avatar         String?
+  name           String
+  bio            String?
+  walletBalance  Decimal  @default(0) @db.Decimal(18, 2)
+  followersCount Int      @default(0)
+  followingCount Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  videos       Video[]
+  likes        VideoLike[]
+  comments     VideoComment[]
+  tipsGiven    VideoTip[]  @relation("tips_given")
+  tipsReceived VideoTip[]  @relation("tips_received")
+  following    Follow[]    @relation("user_following")
+  followers    Follow[]    @relation("user_followers")
+}
+
+model Follow {
+  id          Int      @id @default(autoincrement())
+  followerId  Int
+  followingId Int
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("user_following", fields: [followerId], references: [id])
+  following User @relation("user_followers", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+  @@index([followingId])
+}
+
+model Video {
+  id            Int      @id @default(autoincrement())
+  authorId      Int
+  title         String
+  description   String?  @db.Text
+  thumbnailUrl  String
+  videoUrl      String
+  genre         String?
+  tags          String[] @default([])
+  aspectRatio   Float?
+  durationSec   Int?
+  viewsCount    Int      @default(0)
+  likesCount    Int      @default(0)
+  commentsCount Int      @default(0)
+  tipsCount     Int      @default(0)
+  tipsAmount    Decimal  @default(0) @db.Decimal(18, 2)
+  parentId      Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  author   User       @relation(fields: [authorId], references: [id])
+  parent   Video?     @relation("video_remix", fields: [parentId], references: [id])
+  remixes  Video[]    @relation("video_remix")
+  likes    VideoLike[]
+  comments VideoComment[]
+  tips     VideoTip[]
+
+  @@index([authorId])
+  @@index([parentId])
+  @@index([genre])
+  @@index([createdAt])
+}
+
+model VideoLike {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  videoId   Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  video Video @relation(fields: [videoId], references: [id])
+
+  @@unique([userId, videoId])
+  @@index([videoId])
+}
+
+model VideoTip {
+  id         Int      @id @default(autoincrement())
+  videoId    Int
+  tipperId   Int
+  receiverId Int
+  amount     Decimal  @db.Decimal(18, 2)
+  createdAt  DateTime @default(now())
+
+  video    Video @relation(fields: [videoId], references: [id])
+  tipper   User  @relation("tips_given", fields: [tipperId], references: [id])
+  receiver User  @relation("tips_received", fields: [receiverId], references: [id])
+
+  @@index([videoId])
+  @@index([receiverId])
+}
+
+model VideoComment {
+  id         Int      @id @default(autoincrement())
+  videoId    Int
+  authorId   Int
+  content    String   @db.Text
+  parentId   Int?
+  likesCount Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  video    Video          @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  author   User           @relation(fields: [authorId], references: [id])
+  parent   VideoComment?  @relation("comment_replies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies  VideoComment[] @relation("comment_replies")
+
+  @@index([videoId])
+  @@index([authorId])
+  @@index([parentId])
+  @@index([createdAt])
+}

@@ -250,7 +250,6 @@
   animation: fade-in 1s ease-out 0.6s forwards;
 }
 
-/* Shake animation for locked buttons */
 @keyframes shake {
 
   0%,
@@ -258,59 +257,42 @@
     transform: translateX(0);
   }
 
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-4px);
+  20% {
+    transform: translateX(-5px);
   }
 
-  20%,
-  40%,
-  60%,
+  40% {
+    transform: translateX(5px);
+  }
+
+  60% {
+    transform: translateX(-5px);
+  }
+
   80% {
-    transform: translateX(4px);
+    transform: translateX(5px);
   }
 }
 
 .animate-shake {
-  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
 }
 
-
-/* Hero Title - Fluid Typography with Gradient and Clip Mask Effect */
+/* Hero Title - Fluid Typography with Gradient */
 .hero-title {
   /* Fluid typography: scales from 3rem (48px) to 10rem (160px) */
   font-size: clamp(3rem, 8vw + 1rem, 10rem);
   line-height: 1.1;
 
-  /* Initial state: Pure white */
-  color: #ffffff;
-
-  /* Clip mask hover effect */
-  position: relative;
-  display: inline-block;
-  cursor: default;
-}
-
-.hero-title::before {
-  content: 'MOVIE UTOPIA';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* Gradient text - always visible */
   background: linear-gradient(135deg, #8b5cf6 0%, #f59e0b 50%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-}
 
-.hero-title:hover::before {
-  clip-path: inset(0 0 0 0);
+  position: relative;
+  display: inline-block;
+  cursor: default;
 }
 
 /* Hero Subtitle - Fluid Typography */
@@ -327,15 +309,20 @@
 }
 
 /* Masonry Grid Styles - 高级感布局 */
+.masonry-section {
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
 .masonry-grid {
   display: flex;
-  margin-left: -24px;
+  margin-left: -12px;
   /* 更大的间距 */
   width: auto;
 }
 
 .masonry-column {
-  padding-left: 24px;
+  padding-left: 12px;
   /* 更大的间距 */
   background-clip: padding-box;
 }
@@ -343,6 +330,15 @@
 .masonry-column>div {
   margin-bottom: 32px;
   /* 更舒适的纵向间距 */
+}
+
+.masonry-column > a {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.masonry-column > a:last-child {
+  margin-bottom: 0;
 }
 
 /* 高级卡片效果 */

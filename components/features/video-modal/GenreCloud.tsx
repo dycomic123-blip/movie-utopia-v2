@@ -1,12 +1,12 @@
 'use client'
 
 import { VideoItem } from '@/lib/types/video'
-import { mockVideos } from '@/lib/data/mockVideos'
 import { getGenreFrequency } from '@/lib/utils/rankings'
 import { useRouter } from 'next/navigation'
 
 interface GenreCloudProps {
   currentVideo: VideoItem
+  videos: VideoItem[]
 }
 
 const genreColors: Record<string, string> = {
@@ -19,9 +19,13 @@ const genreColors: Record<string, string> = {
   Thriller: 'text-green-400 hover:text-green-300',
 }
 
-export function GenreCloud({ currentVideo }: GenreCloudProps) {
+export function GenreCloud({ currentVideo, videos }: GenreCloudProps) {
   const router = useRouter()
-  const genreFrequency = getGenreFrequency(mockVideos)
+  const genreFrequency = getGenreFrequency(videos)
+
+  if (genreFrequency.size === 0) {
+    return <div className="text-sm text-neutral-400">暂无可用的类型数据</div>
+  }
 
   const maxFrequency = Math.max(...Array.from(genreFrequency.values()))
   const minFontSize = 12

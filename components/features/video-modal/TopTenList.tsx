@@ -1,12 +1,16 @@
 'use client'
 
-import { mockVideos } from '@/lib/data/mockVideos'
 import { getTopTenVideos } from '@/lib/utils/rankings'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
+import { VideoItem } from '@/lib/types/video'
 
-export function TopTenList() {
-  const topTen = getTopTenVideos(mockVideos)
+interface TopTenListProps {
+  videos: VideoItem[]
+}
+
+export function TopTenList({ videos }: TopTenListProps) {
+  const topTen = getTopTenVideos(videos)
 
   return (
     <div className="space-y-3">

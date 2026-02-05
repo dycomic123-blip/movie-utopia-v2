@@ -1,17 +1,17 @@
 'use client'
 
 import { VideoItem } from '@/lib/types/video'
-import { mockVideos } from '@/lib/data/mockVideos'
 import { getRelatedVideos } from '@/lib/utils/relatedVideos'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
 
 interface RelatedVideosProps {
   currentVideo: VideoItem
+  videos: VideoItem[]
 }
 
-export function RelatedVideos({ currentVideo }: RelatedVideosProps) {
-  const relatedVideos = getRelatedVideos(currentVideo, mockVideos, 8)
+export function RelatedVideos({ currentVideo, videos }: RelatedVideosProps) {
+  const relatedVideos = getRelatedVideos(currentVideo, videos, 8)
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
