@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n/LanguageProvider'
 
 interface CreateButtonProps {
   className?: string
@@ -11,6 +12,7 @@ interface CreateButtonProps {
 }
 
 export function CreateButton({ className, onClick }: CreateButtonProps) {
+  const { t } = useLanguage()
   return (
     <Link href="/studio/index.html" target="_blank">
       <Button
@@ -24,7 +26,7 @@ export function CreateButton({ className, onClick }: CreateButtonProps) {
         aria-label="Create new video"
       >
         <Sparkles className="w-4 h-4" aria-hidden="true" />
-        <span>Create</span>
+        <span>{t('create')}</span>
       </Button>
     </Link>
   )

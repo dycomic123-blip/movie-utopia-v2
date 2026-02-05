@@ -1,7 +1,9 @@
-import { mockVideos } from '@/lib/data/mockVideos'
-import { generateMockCreators } from '@/lib/data/mockCreators'
 import { notFound } from 'next/navigation'
 import { VideoModalClient } from '@/components/features/video/VideoModalClient'
+import { mapVideoToItem } from '@/lib/db/videoMapper'
+import { getRelatedVideos, getVideoById } from '@/lib/db/videoQueries'
+
+export const revalidate = 30
 
 interface PageProps {
   params: Promise<{
@@ -9,27 +11,28 @@ interface PageProps {
   }>
 }
 
-export function generateStaticParams() {
-  return mockVideos.map((video) => ({
-    id: video.id,
-  }))
-}
-
 export default async function VideoPage({ params }: PageProps) {
   const { id } = await params
-  const video = mockVideos.find((v) => v.id === id)
+  const videoId = Number(id)
 
-  if (!video) {
+  if (!Number.isInteger(videoId) || videoId <= 0) {
     notFound()
   }
 
-  const creators = generateMockCreators()
-  const relatedVideos = mockVideos.filter((v) => v.id !== id).slice(0, 10)
+  const videoRecord = await getVideoById(videoId)
+
+  if (!videoRecord) {
+    notFound()
+  }
+
+  const relatedRecords = await getRelatedVideos(videoId)
+
+  const video = mapVideoToItem(videoRecord)
+  const relatedVideos = relatedRecords.map(mapVideoToItem)
 
   return (
     <VideoModalClient
       video={video}
-      creators={creators}
       relatedVideos={relatedVideos}
     />
   )

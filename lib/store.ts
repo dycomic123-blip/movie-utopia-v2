@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 interface AppStore {
   credits: number
-  setCredits: (credits: number) => void
+  setCredits: (credits: number | ((prev: number) => number)) => void
   deductCredits: (amount: number) => void
   isCommandMenuOpen: boolean
   setCommandMenuOpen: (open: boolean) => void
@@ -23,8 +23,11 @@ interface AppStore {
 }
 
 export const useAppStore = create<AppStore>((set) => ({
-  credits: 1888, // Mock initial value
-  setCredits: (credits) => set({ credits }),
+  credits: 0,
+  setCredits: (credits) =>
+    set((state) => ({
+      credits: typeof credits === 'function' ? credits(state.credits) : credits
+    })),
   deductCredits: (amount) => set((state) => ({
     credits: Math.max(0, state.credits - amount)
   })),

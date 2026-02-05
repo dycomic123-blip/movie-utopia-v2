@@ -68,7 +68,7 @@ export function CommunityHubCard({ challenges, bounties, posts }: CommunityHubCa
   }
 
   return (
-    <div className="bg-card rounded-xl border border-white/10 overflow-hidden shadow-xl">
+    <div className="bg-card rounded-xl border border-white/10 overflow-hidden shadow-xl mb-3">
       {/* Tab 切换按钮 */}
       <div className="flex border-b border-white/10 bg-white/[0.02]">
         {tabs.map((tab) => {

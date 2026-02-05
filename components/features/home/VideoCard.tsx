@@ -1,14 +1,17 @@
 import { VideoItem } from '@/lib/types/video'
-import { Heart, DollarSign, Play } from 'lucide-react'
+import { Heart, Coins, Play } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { GenreBadge } from './GenreBadge'
 import Link from 'next/link'
+import { useMemo } from 'react'
+import { cn } from '@/lib/utils'
 
 interface VideoCardProps {
   video: VideoItem
+  fixedHeight?: boolean // 是否使用固定高度（用于列表页面）
 }
 
-export function VideoCard({ video }: VideoCardProps) {
+export function VideoCard({ video, fixedHeight = false }: VideoCardProps) {
   const handleClick = () => {
     // Save scroll position before navigating
     if (typeof window !== 'undefined') {
@@ -16,17 +19,33 @@ export function VideoCard({ video }: VideoCardProps) {
     }
   }
 
+  // Generate a random aspect ratio variation for masonry effect
+  // Use video.id as seed for consistency
+  // 如果 fixedHeight 为 true，则不使用随机高度
+  const randomHeight = useMemo(() => {
+    if (fixedHeight) return 1.0 // 固定高度，不使用随机变化
+    const seed = parseInt(video.id) || 0
+    const variations = [0.85, 0.95, 1.0, 1.1, 1.2, 1.3]
+    return variations[seed % variations.length]
+  }, [video.id, fixedHeight])
+
+  const adjustedAspectRatio = video.aspectRatio * randomHeight
+  // 在固定高度模式下，使用统一的 16:9 比例
+  const finalAspectRatio = fixedHeight ? 16 / 9 : adjustedAspectRatio
+
   return (
-    <Link href={`/video/${video.id}`} onClick={handleClick}>
-      <article className="group relative overflow-hidden rounded-xl bg-card cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+    <Link href={`/video/${video.id}`} onClick={handleClick} prefetch>
+      <article className="group relative overflow-hidden rounded-xl bg-card cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
         <div
-          style={{ aspectRatio: video.aspectRatio }}
+          style={{ aspectRatio: finalAspectRatio }}
           className="relative w-full overflow-hidden bg-muted"
         >
           <img
             src={video.thumbnail}
             alt={`${video.title} by ${video.author.name}`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Play Button Overlay - Frosted Glass */}
@@ -61,10 +80,10 @@ export function VideoCard({ video }: VideoCardProps) {
                 <span className="font-medium">{video.likes.toLocaleString()}</span>
               </div>
 
-              {/* Tips with dollar sign */}
+              {/* Tips with credits icon */}
               <div className="flex items-center gap-1.5 text-white/90">
-                <DollarSign className="h-4 w-4 text-amber-500" />
-                <span className="font-medium">${video.tips.toLocaleString()}</span>
+                <Coins className="h-4 w-4 text-amber-500" />
+                <span className="font-medium">{video.tips.toLocaleString()}</span>
               </div>
             </div>
           </div>

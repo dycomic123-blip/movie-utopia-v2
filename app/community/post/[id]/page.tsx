@@ -11,7 +11,9 @@ export function generateStaticParams() {
   ]
 }
 
-export default function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+
   return (
     <div className="min-h-screen pt-24 pb-16">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -34,7 +36,7 @@ export default function PostPage({ params }: { params: { id: string } }) {
                 社区帖子详情页面
               </h1>
               <p className="text-muted-foreground">
-                帖子 ID: {params.id}
+                帖子 ID: {id}
               </p>
             </div>
           </div>

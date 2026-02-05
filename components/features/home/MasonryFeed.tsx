@@ -1,3 +1,5 @@
+'use client'
+
 import { VideoItem, Creator } from '@/lib/types/video'
 import { ChallengeCard as ChallengeType } from '@/lib/types/community'
 import { PostCard as PostType } from '@/lib/types/community'
@@ -59,7 +61,7 @@ export function MasonryFeed({ videos, creators, communityData }: MasonryFeedProp
   })
 
   return (
-    <section aria-label="Video gallery">
+    <section aria-label="Video gallery" className="masonry-section">
       <Masonry
         breakpointCols={breakpointColumns}
         className="masonry-grid"

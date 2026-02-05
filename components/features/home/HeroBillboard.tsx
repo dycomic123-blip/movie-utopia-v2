@@ -19,7 +19,7 @@ export function HeroBillboard({ content }: HeroBillboardProps) {
     const timer = setTimeout(() => {
       setShowVideo(true)
       videoRef.current?.play()
-    }, 3000)
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -37,7 +37,7 @@ export function HeroBillboard({ content }: HeroBillboardProps) {
   }
 
   return (
-    <section className="relative w-full h-[80vh] overflow-hidden bg-black">
+    <section className="relative w-screen h-[80vh] overflow-hidden bg-black">
       {/* Cover Image */}
       <div
         className={`absolute inset-0 transition-opacity duration-[800ms] ${
@@ -47,7 +47,7 @@ export function HeroBillboard({ content }: HeroBillboardProps) {
         <img
           src={content.coverImage}
           alt={content.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover md:object-cover"
         />
       </div>
 
@@ -55,16 +55,17 @@ export function HeroBillboard({ content }: HeroBillboardProps) {
       <video
         ref={videoRef}
         src={content.videoUrl}
+        
         loop
         muted={isMuted}
         playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[800ms] ${
+        className={`absolute inset-0 w-full h-full object-cover md:object-cover transition-opacity duration-[800ms] ${
           showVideo ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" />
 
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center">
@@ -95,7 +96,7 @@ export function HeroBillboard({ content }: HeroBillboardProps) {
       </div>
 
       {/* Mute Toggle Button - Only visible when video is playing */}
-      {showVideo && (
+      {/* {showVideo && (
         <button
           onClick={toggleMute}
           aria-label={isMuted ? 'Unmute video' : 'Mute video'}
@@ -107,7 +108,7 @@ export function HeroBillboard({ content }: HeroBillboardProps) {
             <Volume2 className="h-5 w-5 text-white" />
           )}
         </button>
-      )}
+      )} */}
     </section>
   )
 }

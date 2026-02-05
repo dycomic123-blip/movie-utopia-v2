@@ -4,10 +4,13 @@ import "./globals.css";
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { CommandMenu } from '@/components/layout/CommandMenu'
+import { ScrollToTop } from '@/components/layout/ScrollToTop'
 import { Toaster } from 'sonner'
 import { AuthProvider } from '@/components/features/auth/AuthProvider'
+import { UserProfileProvider } from '@/components/features/auth/UserProfileProvider'
 import { AuthGate } from '@/components/features/auth/AuthGate'
 import { AccessKeyModal } from '@/components/features/auth/AccessKeyModal'
+import { LanguageProvider } from '@/lib/i18n/LanguageProvider'
 
 const inter = Inter({
   variable: "--font-sans",
@@ -24,18 +27,6 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   title: "MOVIE UTOPIA - AI Video Platform",
   description: "Premium AI-powered video platform with cutting-edge features",
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
-  themeColor: '#141414',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'black-translucent',
-    title: 'Movie Utopia',
-  },
 };
 
 export default function RootLayout({
@@ -50,22 +41,27 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfairDisplay.variable} antialiased`}
       >
-        <AuthProvider>
-          {/* Login Modal - Always rendered first, shown when not authenticated */}
-          <AccessKeyModal />
+        <LanguageProvider>
+          <AuthProvider>
+            <UserProfileProvider>
+              {/* Login Modal - Always rendered first, shown when not authenticated */}
+              <AccessKeyModal />
 
-          {/* Main content - Only rendered when authenticated */}
-          <AuthGate>
-            <SiteHeader />
-            <main className="min-h-screen pt-16">
-              {children}
-            </main>
-            <SiteFooter />
-            <CommandMenu />
-            <Toaster theme="dark" position="top-center" />
-            {modal}
-          </AuthGate>
-        </AuthProvider>
+              {/* Main content - Only rendered when authenticated */}
+              <AuthGate>
+                <ScrollToTop />
+                <SiteHeader />
+                <main className="min-h-screen pt-16">
+                  {children}
+                </main>
+                <SiteFooter />
+                <CommandMenu />
+                <Toaster theme="dark" position="top-center" />
+                {modal}
+              </AuthGate>
+            </UserProfileProvider>
+          </AuthProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

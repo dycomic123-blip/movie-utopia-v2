@@ -3,17 +3,23 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useAppStore } from '@/lib/store'
 import { CreditBalance } from './CreditBalance'
 import { CreateButton } from './CreateButton'
+import { UploadButton } from './UploadButton'
 import { UserNav } from './UserNav'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { Button } from '@/components/ui/button'
+import { useLanguage } from '@/lib/i18n/LanguageProvider'
 
 export function SiteHeader() {
+  const { t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const setCommandMenuOpen = useAppStore((state) => state.setCommandMenuOpen)
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +29,12 @@ export function SiteHeader() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    router.prefetch('/upload')
+    router.prefetch('/profile')
+    router.prefetch('/')
+  }, [router])
 
   return (
     <header
@@ -60,13 +72,13 @@ export function SiteHeader() {
                 href="/about"
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
-                About Us
+                {t('AboutUs')}
               </Link>
             </nav>
           </div>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Search trigger for CommandMenu */}
             <Button
               variant="ghost"
@@ -78,19 +90,19 @@ export function SiteHeader() {
               <Search className="w-5 h-5" aria-hidden="true" />
             </Button>
 
-            <CreditBalance />
-            <CreateButton onClick={() => console.log('Navigate to /studio')} />
+            <div className="hidden md:flex">
+              <CreditBalance />
+            </div>
+            <div className="hidden sm:flex items-center gap-2">
+              <UploadButton />
+              <CreateButton onClick={() => console.log('Navigate to /studio')} />
+            </div>
+            <div className="sm:hidden">
+              <UploadButton className="px-3 py-2 text-xs" />
+            </div>
+            <LanguageSwitcher />
             <UserNav />
 
-            {/* Mobile menu button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              aria-label="Open mobile menu"
-            >
-              <Menu className="w-6 h-6" aria-hidden="true" />
-            </Button>
           </div>
         </div>
       </div>

@@ -71,7 +71,7 @@ export function LeaderboardCardTabs({ creators }: LeaderboardCardTabsProps) {
 
   return (
     <article className={cn(
-      "group relative overflow-hidden rounded-xl cursor-default shadow-md hover:shadow-xl transition-all duration-300",
+      "group relative overflow-hidden rounded-xl cursor-default shadow-md hover:shadow-xl transition-all duration-300 mb-3",
       "bg-gradient-to-br via-card to-card",
       gradient,
       activeTab === 'tips' && "border border-yellow-500/20",
